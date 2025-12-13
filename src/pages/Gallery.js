@@ -12,19 +12,39 @@ const Gallery = () => {
 
   // Fetch albums & photos (read-only)
   useEffect(() => {
-    axios
-      .get(`${API_BASE}/api/albums`)
-      .then((res) => {
-        const data = res.data || [];
-        setAlbums(data.map((a) => a.name));
+    const fetchAlbums = () => {
+      axios
+        .get(`${API_BASE}/api/albums`)
+        .then((res) => {
+          const data = res.data || [];
+          setAlbums(data.map((a) => a.name));
 
-        const photosMap = {};
-        data.forEach((a) => {
-          photosMap[a.name] = a.photos || [];
-        });
-        setPhotos(photosMap);
-      })
-      .catch((err) => console.error("Error fetching gallery:", err));
+          const photosMap = {};
+          data.forEach((a) => {
+            photosMap[a.name] = a.photos || [];
+          });
+          setPhotos(photosMap);
+        })
+        .catch((err) => console.error("Error fetching gallery:", err));
+    };
+
+    // initial fetch
+    fetchAlbums();
+
+    // refresh when gallery is updated elsewhere in the app
+    const onGalleryUpdated = () => fetchAlbums();
+    window.addEventListener('galleryUpdated', onGalleryUpdated);
+
+    // also listen to storage for cross-tab updates
+    const onStorage = (e) => {
+      if (e.key === 'galleryUpdated') fetchAlbums();
+    };
+    window.addEventListener('storage', onStorage);
+
+    return () => {
+      window.removeEventListener('galleryUpdated', onGalleryUpdated);
+      window.removeEventListener('storage', onStorage);
+    };
   }, []);
 
   return (
@@ -43,7 +63,7 @@ const Gallery = () => {
                 <div className="album-thumb">
                   {photos[album]?.[0] ? (
                     <img
-                      src={photos[album][0].url}
+                      src={photos[album][0].url && photos[album][0].url.startsWith('http') ? photos[album][0].url : `${API_BASE}${photos[album][0].url}`}
                       alt={`${album} thumbnail`}
                     />
                   ) : (
@@ -67,15 +87,18 @@ const Gallery = () => {
             </div>
 
             <div className="photo-grid">
-              {photos[selectedAlbum]?.map((photo, index) => (
-                <div
-                  className="photo-card"
-                  key={index}
-                  onClick={() => setModalImage(photo.url)}
-                >
-                  <img src={photo.url} alt={photo.name || "photo"} />
-                </div>
-              ))}
+              {photos[selectedAlbum]?.map((photo, index) => {
+                const src = photo.url && photo.url.startsWith('http') ? photo.url : `${API_BASE}${photo.url}`;
+                return (
+                  <div
+                    className="photo-card"
+                    key={index}
+                    onClick={() => setModalImage(src)}
+                  >
+                    <img src={src} alt={photo.name || "photo"} />
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}

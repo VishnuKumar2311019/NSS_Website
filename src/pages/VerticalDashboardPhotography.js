@@ -31,6 +31,8 @@ const PhotographyDashboard = () => {
         setAlbums([...albums, trimmed]);
         setPhotos((prev) => ({ ...prev, [trimmed]: [] }));
         setNewAlbumName("");
+        // notify gallery to refresh
+        try { localStorage.setItem('galleryUpdated', Date.now().toString()); window.dispatchEvent(new Event('galleryUpdated')); } catch (e) {}
       })
       .catch((err) => console.error("Error creating album:", err));
   };
@@ -44,6 +46,8 @@ const PhotographyDashboard = () => {
         delete updatedPhotos[albumName];
         setPhotos(updatedPhotos);
         if (selectedAlbum === albumName) setSelectedAlbum(null);
+        // notify gallery to refresh
+        try { localStorage.setItem('galleryUpdated', Date.now().toString()); window.dispatchEvent(new Event('galleryUpdated')); } catch (e) {}
       })
       .catch((err) => console.error("Error deleting album:", err));
   };
@@ -63,6 +67,8 @@ const PhotographyDashboard = () => {
           ...prev,
           [albumName]: [...(prev[albumName] || []), ...uploaded],
         }));
+        // notify gallery to refresh
+        try { localStorage.setItem('galleryUpdated', Date.now().toString()); window.dispatchEvent(new Event('galleryUpdated')); } catch (e) {}
       })
       .catch((err) => console.error("Error uploading photos:", err));
   };
@@ -73,6 +79,8 @@ const PhotographyDashboard = () => {
       .then(() => {
         const updated = photos[albumName].filter((_, i) => i !== index);
         setPhotos((prev) => ({ ...prev, [albumName]: updated }));
+        // notify gallery to refresh
+        try { localStorage.setItem('galleryUpdated', Date.now().toString()); window.dispatchEvent(new Event('galleryUpdated')); } catch (e) {}
       })
       .catch((err) => console.error("Error deleting photo:", err));
   };

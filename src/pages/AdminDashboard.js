@@ -1,6 +1,6 @@
 import React,{ useEffect, useState } from "react";
 import './AdminDashboard.css';
-import VerticalDashboardPhotography from './VerticalDashboardPhotography';
+import { API_BASE } from '../utils/api';
 import { getAuthHeaders, getAuthHeadersForFormData, isAuthenticated, logout } from '../utils/auth';
 
 const AdminDashboard = () => {
@@ -731,16 +731,19 @@ const handleDeleteUser = async (e) => {
                     <td>
                       {act.photos && act.photos.length > 0 ? (
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
-                          {act.photos.slice(0, 3).map((photo, photoIdx) => (
-                            <img 
-                              key={photoIdx} 
-                              src={photo.url} 
-                              alt={photo.original_name} 
-                              width="40" 
-                              height="40"
-                              style={{ objectFit: 'cover', borderRadius: '4px' }}
-                            />
-                          ))}
+                          {act.photos.slice(0, 3).map((photo, photoIdx) => {
+                            const src = photo.url && photo.url.startsWith('http') ? photo.url : `${API_BASE}${photo.url}`;
+                            return (
+                              <img 
+                                key={photoIdx} 
+                                src={src} 
+                                alt={photo.original_name} 
+                                width="40" 
+                                height="40"
+                                style={{ objectFit: 'cover', borderRadius: '4px' }}
+                              />
+                            );
+                          })}
                           {act.photos.length > 3 && (
                             <span style={{ fontSize: '12px', color: '#666' }}>
                               +{act.photos.length - 3} more
@@ -755,7 +758,7 @@ const handleDeleteUser = async (e) => {
                           {act.reports.map((report, reportIdx) => (
                             <div key={reportIdx} style={{ margin: '2px 0' }}>
                               <a 
-                                href={report.url} 
+                                href={report.url && report.url.startsWith('http') ? report.url : `${API_BASE}${report.url}`} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
                                 style={{ fontSize: '12px', color: '#007bff', textDecoration: 'none' }}
@@ -800,6 +803,8 @@ if (activeTab === 'gallery') {
       const ref = await fetch('http://localhost:5000/api/albums');
       const arr = await ref.json();
       setAlbumsList(arr || []);
+      // notify gallery viewers to refresh
+      try { localStorage.setItem('galleryUpdated', Date.now().toString()); window.dispatchEvent(new Event('galleryUpdated')); } catch (e) {}
     } catch (err) {
       alert('Create album error: ' + err.message);
     }
@@ -872,6 +877,8 @@ if (activeTab === 'gallery') {
       const ref = await fetch('http://localhost:5000/api/albums');
       const arr = await ref.json();
       setAlbumsList(arr || []);
+      // notify gallery viewers to refresh
+      try { localStorage.setItem('galleryUpdated', Date.now().toString()); window.dispatchEvent(new Event('galleryUpdated')); } catch (e) {}
 
     } catch (err) {
       console.error('Gallery upload error', err);
@@ -892,6 +899,8 @@ if (activeTab === 'gallery') {
       const ref = await fetch('http://localhost:5000/api/albums');
       const arr = await ref.json();
       setAlbumsList(arr || []);
+      // notify gallery viewers to refresh
+      try { localStorage.setItem('galleryUpdated', Date.now().toString()); window.dispatchEvent(new Event('galleryUpdated')); } catch (e) {}
       setFormData(prev => ({ ...prev, albumName: '' }));
     } catch (err) {
       alert('Delete error: ' + err.message);
@@ -908,6 +917,8 @@ if (activeTab === 'gallery') {
       const ref = await fetch('http://localhost:5000/api/albums');
       const arr = await ref.json();
       setAlbumsList(arr || []);
+      // notify gallery viewers to refresh
+      try { localStorage.setItem('galleryUpdated', Date.now().toString()); window.dispatchEvent(new Event('galleryUpdated')); } catch (e) {}
     } catch (err) {
       alert('Delete photo error: ' + err.message);
     }
@@ -963,12 +974,15 @@ if (activeTab === 'gallery') {
             <h4>Photos</h4>
             {formData.albumName ? (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: 8 }}>
-                {(albumsList.find(a => a.name === formData.albumName)?.photos || []).map((p, idx) => (
+                {(albumsList.find(a => a.name === formData.albumName)?.photos || []).map((p, idx) => {
+                  const src = p.url && p.url.startsWith('http') ? p.url : `${API_BASE}${p.url}`;
+                  return (
                   <div key={idx} style={{ position: 'relative' }}>
-                    <img src={p.url} alt={p.filename || p.original_name} style={{ width: '100%', height: 90, objectFit: 'cover', borderRadius: 4 }} />
+                    <img src={src} alt={p.filename || p.original_name} style={{ width: '100%', height: 90, objectFit: 'cover', borderRadius: 4 }} />
                     <button type="button" onClick={() => handleDeletePhoto(formData.albumName, idx)} style={{ position: 'absolute', top: 6, right: 6, background: '#dc3545', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 6px', cursor: 'pointer' }}>Delete</button>
                   </div>
-                ))}
+                  )
+                })}
               </div>
             ) : <div>Select an album to view photos</div>}
           </div>
@@ -1057,26 +1071,20 @@ if (activeTab === 'gallery') {
       </aside>
 
       <main className="main-content">
-        {/* If gallery is selected, render the photography admin component which
-            already handles create/upload/delete/view for albums and photos. */}
-        {activeTab === 'gallery' ? (
-          <VerticalDashboardPhotography />
-        ) : (
-          <>
-            <div className="button-group">
-              {['add', 'update', 'delete', 'view'].map((action) => (
-                <button
-                  key={action}
-                  onClick={() => handleActionClick(action)}
-                  className={selectedAction === action ? 'selected' : ''}
-                >
-                  {action.charAt(0).toUpperCase() + action.slice(1)}
-                </button>
-              ))}
-            </div>
-            {renderForm()}
-          </>
-        )}
+        <>
+          <div className="button-group">
+            {['add', 'update', 'delete', 'view'].map((action) => (
+              <button
+                key={action}
+                onClick={() => handleActionClick(action)}
+                className={selectedAction === action ? 'selected' : ''}
+              >
+                {action.charAt(0).toUpperCase() + action.slice(1)}
+              </button>
+            ))}
+          </div>
+          {renderForm()}
+        </>
       </main>
     </div>
   );
