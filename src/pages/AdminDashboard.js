@@ -8,6 +8,10 @@ const AdminDashboard = () => {
   const [formData, setFormData] = useState({});
   const [membersList, setMembersList] = useState([]);
   const [activitiesList, setActivitiesList] = useState([]); // separate state for activities
+  const [albumsList, setAlbumsList] = useState([]); // for gallery admin
+  const [galleryFiles, setGalleryFiles] = useState(null);
+  const [galleryUploading, setGalleryUploading] = useState(false);
+  const [newAlbumName, setNewAlbumName] = useState('');
 
   // Check authentication on component mount
   useEffect(() => {
@@ -49,6 +53,19 @@ const AdminDashboard = () => {
       .catch((err) => console.error("Error fetching users:", err));
   }
 }, [activeTab,selectedAction]);
+
+// Fetch albums when gallery tab is active
+useEffect(() => {
+  if (activeTab === 'gallery') {
+    fetch("http://localhost:5000/api/albums")
+      .then((res) => res.json())
+      .then((data) => {
+        const arr = data || [];
+        setAlbumsList(arr);
+      })
+      .catch((err) => console.error('Error fetching albums:', err));
+  }
+}, [activeTab]);
 
 
 
@@ -764,6 +781,241 @@ const handleDeleteUser = async (e) => {
   }
 }
 
+if (activeTab === 'gallery') {
+  // gallery action-based UI
+  const handleCreateAlbum = async (e) => {
+    e.preventDefault();
+    if (!newAlbumName) return alert('Enter album name');
+    try {
+      const res = await fetch('http://localhost:5000/api/albums', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: newAlbumName })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || data.message);
+      alert('Album created');
+      setNewAlbumName('');
+      const ref = await fetch('http://localhost:5000/api/albums');
+      const arr = await ref.json();
+      setAlbumsList(arr || []);
+    } catch (err) {
+      alert('Create album error: ' + err.message);
+    }
+  };
+
+  const handleGalleryFileChange = (e) => {
+    const files = Array.from(e.target.files || []);
+    setGalleryFiles(files.length ? files : null);
+  };
+
+  const handleGalleryUpload = async (albumName) => {
+    if (!galleryFiles || galleryFiles.length === 0) return alert('Choose photos to upload');
+
+    // If no album selected, create a default one
+    let finalAlbumName = albumName;
+    if (!finalAlbumName) {
+      finalAlbumName = `Gallery ${new Date().getFullYear()}`;
+      try {
+        const createRes = await fetch('http://localhost:5000/api/albums', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: finalAlbumName })
+        });
+        // if album already exists, it will error but we continue
+        if (createRes.ok) {
+          setAlbumsList(prev => [...prev, { name: finalAlbumName, photos: [] }]);
+        }
+      } catch (err) {
+        console.log('Album may already exist, continuing...');
+      }
+    }
+
+    // 1) Upload files to admin upload endpoint with JWT
+    const form = new FormData();
+    galleryFiles.forEach((f) => form.append('photos', f));
+
+    try {
+      setGalleryUploading(true);
+
+      const uploadRes = await fetch('http://localhost:5000/admin/upload-photos', {
+        method: 'POST',
+        headers: getAuthHeadersForFormData(),
+        body: form
+      });
+
+      if (uploadRes.status === 401) {
+        logout();
+        return;
+      }
+
+      const uploadData = await uploadRes.json();
+      if (!uploadRes.ok) throw new Error(uploadData.error || uploadData.message || 'Admin upload failed');
+
+      const uploadedPhotos = uploadData.photos || [];
+
+      // 2) Associate uploaded photos with album via JSON to album endpoint
+      const associateRes = await fetch(`http://localhost:5000/api/albums/${encodeURIComponent(finalAlbumName)}/photos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ photos: uploadedPhotos })
+      });
+
+      const assocData = await associateRes.json();
+      if (!associateRes.ok) throw new Error(assocData.error || assocData.message || 'Associate failed');
+
+      alert('Uploaded and associated ' + (uploadedPhotos.length) + ' photos');
+      setGalleryFiles(null);
+
+      // refresh albums
+      const ref = await fetch('http://localhost:5000/api/albums');
+      const arr = await ref.json();
+      setAlbumsList(arr || []);
+
+    } catch (err) {
+      console.error('Gallery upload error', err);
+      alert('Upload error: ' + err.message);
+    } finally {
+      setGalleryUploading(false);
+    }
+  };
+
+  const handleDeleteAlbum = async (albumName) => {
+    if (!albumName) return alert('Select an album');
+    if (!window.confirm(`Delete album "${albumName}"? This will remove all photos.`)) return;
+    try {
+      const res = await fetch(`http://localhost:5000/api/albums/${encodeURIComponent(albumName)}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || data.message || 'Delete failed');
+      alert(data.message || 'Album deleted');
+      const ref = await fetch('http://localhost:5000/api/albums');
+      const arr = await ref.json();
+      setAlbumsList(arr || []);
+      setFormData(prev => ({ ...prev, albumName: '' }));
+    } catch (err) {
+      alert('Delete error: ' + err.message);
+    }
+  };
+
+  const handleDeletePhoto = async (albumName, index) => {
+    if (!window.confirm('Delete this photo?')) return;
+    try {
+      const res = await fetch(`http://localhost:5000/api/albums/${encodeURIComponent(albumName)}/photos/${index}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || data.message || 'Delete photo failed');
+      alert(data.message || 'Photo deleted');
+      const ref = await fetch('http://localhost:5000/api/albums');
+      const arr = await ref.json();
+      setAlbumsList(arr || []);
+    } catch (err) {
+      alert('Delete photo error: ' + err.message);
+    }
+  };
+
+  switch (selectedAction) {
+    case 'add':
+      return (
+        <div className="form-card">
+          <h3>Create Album / Upload</h3>
+          <form onSubmit={handleCreateAlbum} style={{ marginBottom: 12 }}>
+            <input type="text" placeholder="New album name" value={newAlbumName} onChange={(e) => setNewAlbumName(e.target.value)} />
+            <button type="submit">Create Album</button>
+          </form>
+
+          <div style={{ marginBottom: 12 }}>
+            <label>Select album to upload (or create above):</label>
+            <select name="albumName" value={formData.albumName || ''} onChange={(e) => setFormData(prev => ({ ...prev, albumName: e.target.value }))}>
+              <option value="">-- Select --</option>
+              {albumsList.map((a, idx) => (
+                <option key={idx} value={a.name}>{a.name}</option>
+              ))}
+            </select>
+          </div>
+
+          <div style={{ marginBottom: 12 }}>
+            <input type="file" multiple accept="image/*" onChange={handleGalleryFileChange} />
+            <button onClick={() => handleGalleryUpload(formData.albumName)} disabled={galleryUploading} style={{ marginLeft: 8 }}>{galleryUploading ? 'Uploading...' : 'Upload to Album'}</button>
+          </div>
+        </div>
+      );
+
+    case 'update':
+      return (
+        <div className="form-card">
+          <h3>Update Album (upload/delete photos)</h3>
+          <div style={{ marginBottom: 12 }}>
+            <label>Select album:</label>
+            <select name="albumName" value={formData.albumName || ''} onChange={(e) => setFormData(prev => ({ ...prev, albumName: e.target.value }))}>
+              <option value="">-- Select --</option>
+              {albumsList.map((a, idx) => (
+                <option key={idx} value={a.name}>{a.name}</option>
+              ))}
+            </select>
+          </div>
+
+          <div style={{ marginBottom: 12 }}>
+            <input type="file" multiple accept="image/*" onChange={handleGalleryFileChange} />
+            <button onClick={() => handleGalleryUpload(formData.albumName)} disabled={galleryUploading} style={{ marginLeft: 8 }}>{galleryUploading ? 'Uploading...' : 'Upload Photos'}</button>
+          </div>
+
+          <div>
+            <h4>Photos</h4>
+            {formData.albumName ? (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: 8 }}>
+                {(albumsList.find(a => a.name === formData.albumName)?.photos || []).map((p, idx) => (
+                  <div key={idx} style={{ position: 'relative' }}>
+                    <img src={p.url} alt={p.filename || p.original_name} style={{ width: '100%', height: 90, objectFit: 'cover', borderRadius: 4 }} />
+                    <button type="button" onClick={() => handleDeletePhoto(formData.albumName, idx)} style={{ position: 'absolute', top: 6, right: 6, background: '#dc3545', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 6px', cursor: 'pointer' }}>Delete</button>
+                  </div>
+                ))}
+              </div>
+            ) : <div>Select an album to view photos</div>}
+          </div>
+        </div>
+      );
+
+    case 'delete':
+      return (
+        <div className="form-card">
+          <h3>Delete Album</h3>
+          <div style={{ marginBottom: 12 }}>
+            <label>Select album to delete:</label>
+            <select name="albumName" value={formData.albumName || ''} onChange={(e) => setFormData(prev => ({ ...prev, albumName: e.target.value }))}>
+              <option value="">-- Select --</option>
+              {albumsList.map((a, idx) => (
+                <option key={idx} value={a.name}>{a.name}</option>
+              ))}
+            </select>
+          </div>
+          <button onClick={() => handleDeleteAlbum(formData.albumName)} style={{ background: '#dc3545', color: '#fff', border: 'none', padding: '8px 12px', borderRadius: 6 }}>Delete Album</button>
+        </div>
+      );
+
+    case 'view':
+      return (
+        <div className="form-card">
+          <h3>Albums Preview</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 12 }}>
+            {albumsList.map((a, idx) => (
+              <div key={idx} style={{ padding: 8, border: '1px solid #ddd', borderRadius: 6 }}>
+                <strong style={{ display: 'block', marginBottom: 8 }}>{a.name}</strong>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6 }}>
+                  {(a.photos || []).slice(0,6).map((p, i) => (
+                    <img key={i} src={p.url} alt={p.filename || p.original_name} style={{ width: '100%', height: 60, objectFit: 'cover', borderRadius: 4 }} />
+                  ))}
+                  {(a.photos || []).length === 0 && <div style={{ color: '#666' }}>No Photos</div>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+
+    default:
+      return <p className="placeholder-text">Select an action to proceed.</p>;
+  }
+}
+
 
 
 };
@@ -790,6 +1042,15 @@ const handleDeleteUser = async (e) => {
             }}
           >
             Activities
+          </li>
+          <li
+            className={activeTab === 'gallery' ? 'active' : ''}
+            onClick={() => {
+              setActiveTab('gallery');
+              setSelectedAction('');
+            }}
+          >
+            Gallery
           </li>
         </ul>
       </aside>

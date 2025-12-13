@@ -11,11 +11,18 @@ const Gallery = () => {
 
   // Fetch albums & photos (read-only)
   useEffect(() => {
+    // Fetch albums from local backend (adjust host if needed)
     axios
-      .get("https://nss-website-backend.onrender.com/api/albums")
+      .get("http://localhost:5000/api/albums")
       .then((res) => {
-        setAlbums(res.data.albums);
-        setPhotos(res.data.photos);
+        // backend returns an array of album objects { name, photos }
+        const data = res.data || [];
+        setAlbums(data.map((a) => a.name));
+        const photosMap = {};
+        data.forEach((a) => {
+          photosMap[a.name] = a.photos || [];
+        });
+        setPhotos(photosMap);
       })
       .catch((err) => console.error("Error fetching gallery:", err));
   }, []);

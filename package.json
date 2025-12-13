@@ -28,9 +28,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
-    "backend": "cd ../../nss-backend && python app.py",
+    "backend": "cd ../NSS-Website-Backend && python app.py",
     "frontend": "react-scripts start",
-    "install-all": "npm install && cd ../../nss-backend && pip install -r requirements.txt"
+    "install-all": "npm install && cd ../NSS-Website-Backend && pip install -r requirements.txt"
   },
   "eslintConfig": {
     "extends": [
