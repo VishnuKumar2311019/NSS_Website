@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+
 import Home from './pages/Home';
 import MissionPage from './pages/MissionPage';
 import TeamsPage from './pages/TeamsPage';
@@ -17,13 +18,29 @@ import ActivitiesPage from './pages/ActivitiesPage';
 import ResetPassword from './pages/ResetPassword';
 import ClubsPage from './pages/ClubsPage';
 
+import Navbar from './components/Navbar';
 
-function App() {
+/* ===== Wrapper to control Navbar visibility ===== */
+function Layout() {
+  const location = useLocation();
+
+  // Pages where navbar should NOT appear
+  const hideNavbarRoutes = [
+    '/login',
+    '/admin-dashboard',
+    '/vertical-dashboard/photography'
+  ];
+
+  const shouldHideNavbar =
+    hideNavbarRoutes.includes(location.pathname) ||
+    location.pathname.startsWith('/reset-password');
+
   return (
-    <Router>
+    <>
+      {!shouldHideNavbar && <Navbar />}
+
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/mission" element={<MissionPage />} />
         <Route path="/teams" element={<TeamsPage />} />
         <Route path="/initiatives" element={<InitiativesPage />} />
@@ -33,14 +50,24 @@ function App() {
         <Route path="/collaborators" element={<CollaboratorsPage />} />
         <Route path="/annualReport" element={<AnnualReportPage />} />
         <Route path="/contact" element={<ContactUsPage />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/vertical-dashboard/photography" element={<VerticalDashboardPhotography />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/activities" element={<ActivitiesPage />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/ClubsPage" element={<ClubsPage />} />
 
+        {/* Auth / Dashboards */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/vertical-dashboard/photography" element={<VerticalDashboardPhotography />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
       </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Layout />
     </Router>
   );
 }

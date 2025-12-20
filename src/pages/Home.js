@@ -159,10 +159,10 @@ return (
 </li>
 
     <li>
-      <Link to="/contact"><Mail size={18}/> Contact</Link>
+      <Link to="/gallery"><Image size={18}/> Gallery</Link>
     </li>
     <li>
-      <Link to="/gallery"><Image size={18}/> Gallery</Link>
+      <Link to="/contact"><Mail size={18}/> Contact</Link>
     </li>
     <li className="mobile-login">
       <Link to="/Login">

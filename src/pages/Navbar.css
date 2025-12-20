@@ -1,0 +1,128 @@
+/* ===== TOP HEADER ===== */
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #083b6b;
+  padding: 18px 40px;
+  color: white;
+}
+
+.ssn-logo {
+  height: 70px;
+}
+
+.nss-logo {
+  height: 70px;
+}
+
+.header-text {
+  text-align: center;
+  flex: 1;
+}
+
+.header-text h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.header-text h2 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.header-text p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.time-text {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+/* ===== ANNOUNCEMENT BAR ===== */
+.announcement-bar {
+  background-color: #b30000;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* ===== MAIN NAVBAR ===== */
+.main-navbar {
+  background-color: #062f57;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+}
+
+.nav-left {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.nav-left li {
+  position: relative;
+}
+
+.nav-left a,
+.nav-left span {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nav-left a:hover,
+.nav-left span:hover {
+  text-decoration: underline;
+}
+
+/* ===== DROPDOWN ===== */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 28px;
+  left: 0;
+  background-color: #083b6b;
+  padding: 8px 0;
+  min-width: 160px;
+  z-index: 10;
+}
+
+.dropdown-menu li {
+  padding: 8px 16px;
+}
+
+.dropdown-menu li a {
+  color: white;
+  font-size: 14px;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* ===== LOGIN BUTTON ===== */
+.login-btn {
+  background-color: #0b4d8a;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #1463aa;
+}
