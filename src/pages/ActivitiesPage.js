@@ -93,11 +93,11 @@ const ActivitiesPage = () => {
 
         return (
                 <li key={reportIndex}>
-                <a
-                  href={reportUrl}
-                      className="report-link"
-                  >
-                  📄 {report.original_name || report.filename || report.name || `Report ${reportIndex + 1}`}
+               <a
+                  href={report.url}
+                  className="report-link"
+                >
+                  📄 {report.original_name || `Report ${reportIndex + 1}`}
                 </a>
                 </li>
                 );
