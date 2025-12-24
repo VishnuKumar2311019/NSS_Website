@@ -18,7 +18,7 @@ import ActivitiesPage from './pages/ActivitiesPage';
 import ResetPassword from './pages/ResetPassword';
 import ClubsPage from './pages/ClubsPage';
 
-import Navbar from './components/Navbar';
+import Navbar from './pages/Navbar.js';
 
 /* ===== Wrapper to control Navbar visibility ===== */
 function Layout() {
