@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Gallery.css";
 import { API_BASE } from "../utils/api";
+import MainLayout from "../components/MainLayout";
 
 const Gallery = () => {
   // ===== STATE DECLARATIONS =====
@@ -13,11 +14,7 @@ const Gallery = () => {
 
   // ===== LOCK BACKGROUND SCROLL WHEN MODAL OPENS =====
   useEffect(() => {
-    if (modalImage) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = modalImage ? "hidden" : "auto";
   }, [modalImage]);
 
   // ===== FETCH ALBUMS & PHOTOS =====
@@ -57,98 +54,102 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className="gallery-wrapper">
-      <div className="gallery-container">
-        <h2 className="gallery-title">📸 Our Gallery</h2>
+    <MainLayout>
 
-        {/* ===== ALBUM LIST VIEW ===== */}
-        {!selectedAlbum ? (
-          <div className="album-grid">
-            {albums.map((album) => (
-              <div
-                className="album-card"
-                key={album}
-                onClick={() => setSelectedAlbum(album)}
-              >
-                <div className="album-thumb">
-                  {photos[album]?.[0] ? (
-                    <img
-                      src={
-                        photos[album][0].url.startsWith("http")
-                          ? photos[album][0].url
-                          : `${API_BASE}${photos[album][0].url}`
-                      }
-                      alt={`${album} thumbnail`}
-                    />
-                  ) : (
-                    <div className="empty-thumb">No Photos</div>
-                  )}
-                </div>
-                <div className="album-name">{album}</div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          /* ===== ALBUM PHOTOS VIEW ===== */
-          <div className="album-view">
-            <div className="album-header">
-              <h3>{selectedAlbum}</h3>
-              <button
-                className="back-btn"
-                onClick={() => setSelectedAlbum(null)}
-              >
-                ← Back
-              </button>
-            </div>
+      <div className="gallery-wrapper">
+        <div className="gallery-container">
+          <h2 className="gallery-title">📸 Our Gallery</h2>
 
-            <div className="photo-grid">
-              {photos[selectedAlbum]?.map((photo, index) => {
-                const src = photo.url.startsWith("http")
-                  ? photo.url
-                  : `${API_BASE}${photo.url}`;
-
-                return (
-                  <div
-                    className="photo-card"
-                    key={index}
-                    onClick={() => setModalImage(src)}
-                  >
-                    <div className="photo-img-wrapper">
-                      <img src={src} alt={photo.name || "photo"} />
-                    </div>
+          {/* ===== ALBUM LIST VIEW ===== */}
+          {!selectedAlbum ? (
+            <div className="album-grid">
+              {albums.map((album) => (
+                <div
+                  className="album-card"
+                  key={album}
+                  onClick={() => setSelectedAlbum(album)}
+                >
+                  <div className="album-thumb">
+                    {photos[album]?.[0] ? (
+                      <img
+                        src={
+                          photos[album][0].url.startsWith("http")
+                            ? photos[album][0].url
+                            : `${API_BASE}${photos[album][0].url}`
+                        }
+                        alt={`${album} thumbnail`}
+                      />
+                    ) : (
+                      <div className="empty-thumb">No Photos</div>
+                    )}
                   </div>
-                );
-              })}
+                  <div className="album-name">{album}</div>
+                </div>
+              ))}
             </div>
-          </div>
-        )}
+          ) : (
+            /* ===== ALBUM PHOTOS VIEW ===== */
+            <div className="album-view">
+              <div className="album-header">
+                <h3>{selectedAlbum}</h3>
+                <button
+                  className="back-btn"
+                  onClick={() => setSelectedAlbum(null)}
+                >
+                  ← Back
+                </button>
+              </div>
 
-        {/* ===== MODAL VIEW ===== */}
-        {modalImage && (
-          <div
-            className="modal-overlay"
-            onClick={() => setModalImage(null)}
-          >
-            <div
-              className="modal-content"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <img
-                src={modalImage}
-                alt="Gallery Preview"
-                className="modal-img"
-              />
-              <button
-                className="modal-close"
-                onClick={() => setModalImage(null)}
-              >
-                ✖
-              </button>
+              <div className="photo-grid">
+                {photos[selectedAlbum]?.map((photo, index) => {
+                  const src = photo.url.startsWith("http")
+                    ? photo.url
+                    : `${API_BASE}${photo.url}`;
+
+                  return (
+                    <div
+                      className="photo-card"
+                      key={index}
+                      onClick={() => setModalImage(src)}
+                    >
+                      <div className="photo-img-wrapper">
+                        <img src={src} alt={photo.name || "photo"} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+
+          {/* ===== MODAL VIEW ===== */}
+          {modalImage && (
+            <div
+              className="modal-overlay"
+              onClick={() => setModalImage(null)}
+            >
+              <div
+                className="modal-content"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img
+                  src={modalImage}
+                  alt="Gallery Preview"
+                  className="modal-img"
+                />
+                <button
+                  className="modal-close"
+                  onClick={() => setModalImage(null)}
+                >
+                  ✖
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+
+    </MainLayout>
   );
 };
 

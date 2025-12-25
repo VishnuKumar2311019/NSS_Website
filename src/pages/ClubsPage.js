@@ -1,6 +1,7 @@
 // ClubsPage.jsx
 import React, { useState } from "react";
 import "./ClubsPage.css";
+import MainLayout from "../components/MainLayout";
 
 const clubs = {
   Nature: {
@@ -123,44 +124,54 @@ export default function ClubsPage() {
   const [activeTab, setActiveTab] = useState("Nature");
 
   return (
-    <div className="clubs-page">
-      <h1>Our Clubs</h1>
+    <MainLayout>
 
-      {/* Tabs */}
-      <div className="club-tabs">
-        {Object.keys(clubs).map((clubKey) => (
-          <button
-            key={clubKey}
-            className={activeTab === clubKey ? "active" : ""}
-            onClick={() => setActiveTab(clubKey)}
-          >
-            {clubs[clubKey].title}
-          </button>
-        ))}
-      </div>
+      <div className="clubs-page">
+        <h1>Our Clubs</h1>
 
-      {/* Tab Content */}
-      <div className="club-content">
-        <h2>{clubs[activeTab].title}</h2>
-        <h3>{clubs[activeTab].descriptionTitle}</h3>
-        <p>{clubs[activeTab].description}</p>
-        <strong>Mission:</strong>
-        <p>{clubs[activeTab].mission}</p>
-        <strong>Vision:</strong>
-        <p>{clubs[activeTab].vision}</p>
-        <strong>Key Activities:</strong>
-        <ul>
-          {clubs[activeTab].activities.map((activity, idx) => (
-            <li key={idx}>{activity}</li>
+        {/* Tabs */}
+        <div className="club-tabs">
+          {Object.keys(clubs).map((clubKey) => (
+            <button
+              key={clubKey}
+              className={activeTab === clubKey ? "active" : ""}
+              onClick={() => setActiveTab(clubKey)}
+            >
+              {clubs[clubKey].title}
+            </button>
           ))}
-        </ul>
-        <strong>Achievements:</strong>
-        <p>{clubs[activeTab].achievements}</p>
-        <strong>Notable Collaborations:</strong>
-        <p>{clubs[activeTab].collaborations}</p>
-        <strong>Future Plans:</strong>
-        <p>{clubs[activeTab].futurePlans}</p>
+        </div>
+
+        {/* Tab Content */}
+        <div className="club-content">
+          <h2>{clubs[activeTab].title}</h2>
+          <h3>{clubs[activeTab].descriptionTitle}</h3>
+          <p>{clubs[activeTab].description}</p>
+
+          <strong>Mission:</strong>
+          <p>{clubs[activeTab].mission}</p>
+
+          <strong>Vision:</strong>
+          <p>{clubs[activeTab].vision}</p>
+
+          <strong>Key Activities:</strong>
+          <ul>
+            {clubs[activeTab].activities.map((activity, idx) => (
+              <li key={idx}>{activity}</li>
+            ))}
+          </ul>
+
+          <strong>Achievements:</strong>
+          <p>{clubs[activeTab].achievements}</p>
+
+          <strong>Notable Collaborations:</strong>
+          <p>{clubs[activeTab].collaborations}</p>
+
+          <strong>Future Plans:</strong>
+          <p>{clubs[activeTab].futurePlans}</p>
+        </div>
       </div>
-    </div>
+
+    </MainLayout>
   );
 }

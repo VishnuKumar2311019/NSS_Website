@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './AchievementsPage.css';
-import './Navbar.js'
-import  './Navbar.css'
+import MainLayout from '../components/MainLayout';
 
 const mockAchievements = [
   {
@@ -41,42 +40,47 @@ const AchievementsPage = () => {
   const [highlighted, setHighlighted] = useState([]);
 
   useEffect(() => {
-    // Replace fetch with mock data for demonstration
-    const all = mockAchievements.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const all = mockAchievements.sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    );
     setAchievements(all);
     setHighlighted(all.filter(item => item.highlighted).slice(0, 3));
   }, []);
 
   return (
-    <div className="achievements-container">
-      <h2>Achievements</h2>
+    <MainLayout>
 
-      {/* Highlighted Section */}
-      <div className="highlighted-section">
-        <h3>🏅 Highlighted Achievements</h3>
-        <div className="highlighted-cards">
-          {highlighted.map((item, index) => (
-            <div className="highlight-card" key={index}>
+      <div className="achievements-container">
+        <h2>Achievements</h2>
+
+        {/* Highlighted Section */}
+        <div className="highlighted-section">
+          <h3>🏅 Highlighted Achievements</h3>
+          <div className="highlighted-cards">
+            {highlighted.map((item, index) => (
+              <div className="highlight-card" key={index}>
+                <h4>{item.title}</h4>
+                <p>{item.description}</p>
+                <span>{new Date(item.date).toDateString()}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* All Achievements */}
+        <div className="all-achievements">
+          <h3>📅 All Achievements</h3>
+          {achievements.map((item, index) => (
+            <div className="achievement-item" key={index}>
+              <span className="date">{new Date(item.date).toDateString()}</span>
               <h4>{item.title}</h4>
               <p>{item.description}</p>
-              <span>{new Date(item.date).toDateString()}</span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* All Achievements */}
-      <div className="all-achievements">
-        <h3>📅 All Achievements</h3>
-        {achievements.map((item, index) => (
-          <div className="achievement-item" key={index}>
-            <span className="date">{new Date(item.date).toDateString()}</span>
-            <h4>{item.title}</h4>
-            <p>{item.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    </MainLayout>
   );
 };
 

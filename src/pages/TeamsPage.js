@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Bar } from 'react-chartjs-2';
 import "./TeamsPage.css";
+import MainLayout from "../components/MainLayout";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(
@@ -63,146 +64,149 @@ const TeamsPage = () => {
   };
 
   return (
-    <div className="teams-page">
-      <h2>NSS Teams</h2>
+    <MainLayout>
 
-      {/* Tabs */}
-      <div className="team-tabs">
-        <button
-          className={selectedTab === "core" ? "active" : ""}
-          onClick={() => setSelectedTab("core")}
-        >
-          Core Team
-        </button>
-        <button
-          className={selectedTab === "volunteers" ? "active" : ""}
-          onClick={() => setSelectedTab("volunteers")}
-        >
-          Volunteers
-        </button>
-      </div>
+      <div className="teams-page">
+        <h2>NSS Teams</h2>
 
-      {/* Core Team */}
-      {selectedTab === "core" && (
-        <div className="core-team">
-          {Object.entries(coreTeam).map(([vertical, desc], idx) => (
-            <div className="vertical-section" key={idx}>
-              <h3>{vertical}</h3>
-              <p>{desc}</p>
-            </div>
-          ))}
+        {/* Tabs */}
+        <div className="team-tabs">
+          <button
+            className={selectedTab === "core" ? "active" : ""}
+            onClick={() => setSelectedTab("core")}
+          >
+            Core Team
+          </button>
+          <button
+            className={selectedTab === "volunteers" ? "active" : ""}
+            onClick={() => setSelectedTab("volunteers")}
+          >
+            Volunteers
+          </button>
         </div>
-      )}
 
-      {/* Volunteers */}
-      {selectedTab === "volunteers" && (
-        <div className="volunteers-section">
-          <div className="volunteer-intro">
-            <p>{volunteerOverview.description}</p>
-            <h4>Responsibilities</h4>
-            <ul>
-              {volunteerOverview.responsibilities.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="overview-cards">
-            <div className="card">
-              <h3>Total Volunteers</h3>
-              <p>1300+</p>
-            </div>
-            <div className="card">
-              <h3>Total Hours Contributed</h3>
-              <p>1000+</p>
-            </div>
-            <div className="card">
-              <h3>Events Organized</h3>
-              <p>250+</p>
-            </div>
-          </div>
-
-          {/* Monthly Contributions Graph */}
-          <div className="contributions-graph">
-            <h4>Monthly Contributions of NSS Club</h4>
-            <Bar
-              data={monthlyContributions}
-              options={{
-                responsive: true,
-                plugins: {
-                  legend: { display: false },
-                  title: { display: true, text: "Hours Contributed per Month" },
-                },
-              }}
-            />
-          </div>
-
-          {/* Attendance Section */}
-          <div className="attendance-section">
-            {!attendanceAccess ? (
-              <button
-                className="attendance-btn"
-                onClick={() => setShowAttendancePrompt(true)}
-              >
-                View Attendance Sheets
-              </button>
-            ) : (
-              <div className="attendance-links">
-                <h4>Select Year</h4>
-
-                <a
-                  href=""
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="attendance-btn"
-                >
-                  📘 First Year Attendance
-                </a>
-
-                <a
-                  href="https://docs.google.com/spreadsheets/d/1HBx1zccr7rSksv-H9IbO2U292MaUhar70t-PUkQ_Ulc/edit?gid=1040787099#gid=1040787099"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="attendance-btn"
-                >
-                  📗 Second Year Attendance
-                </a>
-
-                <a
-                  href="https://docs.google.com/spreadsheets/d/1DFk62phy0veBHnJj3saI96LiyS-zV3GYp92mnYSgt5k/edit?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="attendance-btn"
-                >
-                  📙 Third Year Attendance
-                </a>
+        {/* Core Team */}
+        {selectedTab === "core" && (
+          <div className="core-team">
+            {Object.entries(coreTeam).map(([vertical, desc], idx) => (
+              <div className="vertical-section" key={idx}>
+                <h3>{vertical}</h3>
+                <p>{desc}</p>
               </div>
-            )}
+            ))}
+          </div>
+        )}
 
-            {showAttendancePrompt && (
-              <div className="attendance-modal">
-                <div className="modal-content">
-                  <h4>Enter Passcode</h4>
-                  <input
-                    type="password"
-                    value={passcode}
-                    onChange={(e) => setPasscode(e.target.value)}
-                    placeholder="Enter passcode"
-                  />
-                  <div className="modal-buttons">
-                    <button onClick={handleAttendanceSubmit}>Submit</button>
-                    <button onClick={() => setShowAttendancePrompt(false)}>
-                      Cancel
-                    </button>
+        {/* Volunteers */}
+        {selectedTab === "volunteers" && (
+          <div className="volunteers-section">
+
+            <div className="volunteer-intro">
+              <p>{volunteerOverview.description}</p>
+              <h4>Responsibilities</h4>
+              <ul>
+                {volunteerOverview.responsibilities.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="overview-cards">
+              <div className="card">
+                <h3>Total Volunteers</h3>
+                <p>1300+</p>
+              </div>
+              <div className="card">
+                <h3>Total Hours Contributed</h3>
+                <p>1000+</p>
+              </div>
+              <div className="card">
+                <h3>Events Organized</h3>
+                <p>250+</p>
+              </div>
+            </div>
+
+            {/* Monthly Contributions Graph */}
+            <div className="contributions-graph">
+              <h4>Monthly Contributions of NSS Club</h4>
+              <Bar
+                data={monthlyContributions}
+                options={{
+                  responsive: true,
+                  plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: "Hours Contributed per Month" },
+                  },
+                }}
+              />
+            </div>
+
+            {/* Attendance Section */}
+            <div className="attendance-section">
+              {!attendanceAccess ? (
+                <button
+                  className="attendance-btn"
+                  onClick={() => setShowAttendancePrompt(true)}
+                >
+                  View Attendance Sheets
+                </button>
+              ) : (
+                <div className="attendance-links">
+                  <h4>Select Year</h4>
+
+                  <a
+                    href="#"
+                    className="attendance-btn"
+                  >
+                    📘 First Year Attendance
+                  </a>
+
+                  <a
+                    href="https://docs.google.com/spreadsheets/d/1HBx1zccr7rSksv-H9IbO2U292MaUhar70t-PUkQ_Ulc/edit?gid=1040787099#gid=1040787099"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="attendance-btn"
+                  >
+                    📗 Second Year Attendance
+                  </a>
+
+                  <a
+                    href="https://docs.google.com/spreadsheets/d/1DFk62phy0veBHnJj3saI96LiyS-zV3GYp92mnYSgt5k/edit?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="attendance-btn"
+                  >
+                    📙 Third Year Attendance
+                  </a>
+                </div>
+              )}
+
+              {showAttendancePrompt && (
+                <div className="attendance-modal">
+                  <div className="modal-content">
+                    <h4>Enter Passcode</h4>
+                    <input
+                      type="password"
+                      value={passcode}
+                      onChange={(e) => setPasscode(e.target.value)}
+                      placeholder="Enter passcode"
+                    />
+                    <div className="modal-buttons">
+                      <button onClick={handleAttendanceSubmit}>Submit</button>
+                      <button onClick={() => setShowAttendancePrompt(false)}>
+                        Cancel
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
 
-        </div>
-      )}
-    </div>
+          </div>
+        )}
+      </div>
+
+    </MainLayout>
   );
 };
 
