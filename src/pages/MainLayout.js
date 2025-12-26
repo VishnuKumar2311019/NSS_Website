@@ -67,9 +67,11 @@ const MainLayout = ({ children }) => {
             <ul className="dropdown-menu">
               <li><Link to="/clubsPage">Electoral Club</Link></li>
               <li><Link to="/clubsPage">Nature Club</Link></li>
+              <li><Link to="/clubsPage">DrugAwareness Club</Link></li>
               <li><Link to="/clubsPage">Sustainability Club</Link></li>
               <li><Link to="/clubsPage">Tulir Club</Link></li>
               <li><Link to="/clubsPage">WISE Wing Club</Link></li>
+
             </ul>
           </li>
 
