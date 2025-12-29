@@ -70,10 +70,12 @@ const ActivitiesPage = () => {
                   {activity.reports.map((report, i) => (
                     <li key={i}>
                       <a
-                        href={report.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        download
+                        href={report.url.replace(
+                        "/upload/",
+                        `/upload/fl_attachment:attachment/fl_filename:${encodeURIComponent(
+                          report.original_name
+                        )}/`
+                      )}
                       >
                         📄 {report.original_name}
                       </a>
