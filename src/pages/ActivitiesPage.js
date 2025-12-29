@@ -70,7 +70,7 @@ const ActivitiesPage = () => {
                   {activity.reports.map((report, i) => (
                     <li key={i}>
                       <a
-                        href={`https://nss-website-backend.onrender.com/api/download-report?url=${encodeURIComponent(report.url)}&filename=${encodeURIComponent(report.original_name)}`}
+                        href={`https://nss-website-backend.onrender.com/download-report?url=${encodeURIComponent(report.url)}&filename=${encodeURIComponent(report.original_name)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
