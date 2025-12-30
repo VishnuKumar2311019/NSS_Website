@@ -69,10 +69,12 @@ const Gallery = () => {
                   key={album}
                   onClick={() => setSelectedAlbum(album)}
                 >
+                  /* Inside the album-grid map */
                   <div className="album-thumb">
                     {photos[album]?.[0] ? (
                       <img
                         src={
+                          /* Check if the URL is already a full Cloudinary link */
                           photos[album][0].url.startsWith("http")
                             ? photos[album][0].url
                             : `${API_BASE}${photos[album][0].url}`
@@ -100,8 +102,10 @@ const Gallery = () => {
                 </button>
               </div>
 
+              /* Inside the album-view (photo-grid) */
               <div className="photo-grid">
                 {photos[selectedAlbum]?.map((photo, index) => {
+                  /* Determine the correct source URL */
                   const src = photo.url.startsWith("http")
                     ? photo.url
                     : `${API_BASE}${photo.url}`;
@@ -110,6 +114,7 @@ const Gallery = () => {
                     <div
                       className="photo-card"
                       key={index}
+                      /* Update modal to use the correct src */
                       onClick={() => setModalImage(src)}
                     >
                       <div className="photo-img-wrapper">
