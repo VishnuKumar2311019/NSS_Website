@@ -69,7 +69,7 @@ const Gallery = () => {
                   key={album}
                   onClick={() => setSelectedAlbum(album)}
                 >
-                  /* Inside the album-grid map */
+                  {/* Inside the album-grid map */}
                   <div className="album-thumb">
                     {photos[album]?.[0] ? (
                       <img
