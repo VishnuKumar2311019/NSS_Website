@@ -12,7 +12,6 @@ import CollaboratorsPage from './pages/CollaboratorsPage';
 import ContactUsPage from './pages/ContactUsPage';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
-import VerticalDashboardPhotography from './pages/VerticalDashboardPhotography';
 import Gallery from './pages/Gallery';
 import ActivitiesPage from './pages/ActivitiesPage';
 import ResetPassword from './pages/ResetPassword';
@@ -35,11 +34,10 @@ function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/activities" element={<ActivitiesPage />} />
         <Route path="/clubsPage" element={<ClubsPage />} />
-
+        
         {/* Auth / dashboards */}
         <Route path="/login" element={<Login />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/vertical-dashboard/photography" element={<VerticalDashboardPhotography />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
       </Routes>
     </Router>

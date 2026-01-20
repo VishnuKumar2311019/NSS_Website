@@ -62,19 +62,7 @@ const MainLayout = ({ children }) => {
             </ul>
           </li>
 
-          <li className="dropdown">
-            <Link to="#"><HeartHandshake size={18}/> Clubs ▾</Link>
-            <ul className="dropdown-menu">
-              <li><Link to="/clubsPage">Electoral Club</Link></li>
-              <li><Link to="/clubsPage">Nature Club</Link></li>
-              <li><Link to="/clubsPage">DrugAwareness Club</Link></li>
-              <li><Link to="/clubsPage">Sustainability Club</Link></li>
-              <li><Link to="/clubsPage">Tulir Club</Link></li>
-              <li><Link to="/clubsPage">WISE Wing Club</Link></li>
-
-            </ul>
-          </li>
-
+          <li><Link to="/clubsPage"><Image size={18}/> Clubs</Link></li>
           <li><Link to="/gallery"><Image size={18}/> Gallery</Link></li>
           <li><Link to="/contact"><Mail size={18}/> Contact</Link></li>
 

@@ -13,13 +13,84 @@ ChartJS.register(
   Legend
 );
 
-// Core team verticals and description
-const coreTeam = {
-  "Event Management": "Plans and coordinates NSS events, ensuring smooth logistics and collaboration with other teams.",
-  "Design and Social Media": "Designs event promotions and manages NSS social media for better outreach.",
-  Finance: "Manages budgeting, fund allocation, and expense tracking for all club activities.",
-  Technical: "Provides technical support for events, including AV setups and troubleshooting.",
-  Documentation: "Records meetings, prepares reports, and compiles documentation of NSS activities.",
+// Core team verticals with detailed information - matching clubs structure
+const coreTeamVerticals = {
+  eventmanagement: {
+    name: "🎯 Event Management",
+    color: "#f59e0b",
+    role: "The Event Management Vertical is responsible for the end-to-end coordination of NSS events, ensuring smooth execution and adherence to schedules, permissions, and logistics.",
+    responsibilities: [
+      { phase: "Before the Event", items: [
+        "Confirm event date, time, and venue",
+        "Coordinate with the Design Team for posters and publicity",
+        "Inform Media and Photography teams",
+        "Assess financial requirements and inform the Finance Team",
+        "Arrange banners, tools, and permissions"
+      ]},
+      { phase: "After the Event", items: [
+        "Ensure attendance is properly updated",
+        "Confirm photo and video documentation",
+        "Coordinate with Documentation Team for report submission",
+        "Verify bill settlement with Finance Team"
+      ]}
+    ]
+  },
+  finance: {
+    name: "💰 Finance",
+    color: "#10b981",
+    role: "The Finance Vertical manages budgeting, bill handling, and financial transparency for NSS activities.",
+    responsibilities: [
+      { phase: "Responsibilities", items: [
+        "Budget planning for events",
+        "Collecting and managing bills with proper bill numbers",
+        "Uploading financial records",
+        "Handling finances for offline events and annual camps"
+      ]},
+      { phase: "Key Principles", items: [
+        "Responsible spending",
+        "Proper documentation",
+        "Accountability and transparency"
+      ]}
+    ]
+  },
+  photography: {
+    name: "📸 Photography & Videography",
+    color: "#06b6d4",
+    role: "Documents all NSS activities visually for record-keeping and outreach.",
+    responsibilities: [
+      { phase: "Responsibilities", items: [
+        "Capturing high-quality photos and videos during events",
+        "Providing documentation photos for reports",
+        "Supporting social media and archival needs"
+      ]}
+    ]
+  },
+  socialmedia: {
+    name: "📱 Social Media",
+    color: "#ec4899",
+    role: "Manages all official NSS SSN social media handles and ensures consistent online engagement.",
+    responsibilities: [
+      { phase: "Responsibilities", items: [
+        "Posting updates, reels, and stories for events",
+        "Engaging students through quizzes and interactive content",
+        "Maintaining platforms such as Instagram, Facebook, YouTube, X (Twitter), and Linktree"
+      ]}
+    ]
+  },
+  technical: {
+    name: "💻 Technical",
+    color: "#6366f1",
+    role: "The Technical Vertical manages the official NSS SSN website and digital infrastructure.",
+    responsibilities: [
+      { phase: "Responsibilities", items: [
+        "Developing and maintaining the NSS website",
+        "Updating events, teams, and activity data",
+        "Fixing technical issues and ensuring smooth operation",
+        "Coordinating with other verticals to upload content",
+        "Managing basic backend and database updates"
+      ]}
+    ]
+  }
 };
 
 // Volunteers overview
@@ -51,6 +122,7 @@ const TeamsPage = () => {
   const [showAttendancePrompt, setShowAttendancePrompt] = useState(false);
   const [passcode, setPasscode] = useState("");
   const [attendanceAccess, setAttendanceAccess] = useState(false);
+  const [activeVertical, setActiveVertical] = useState('eventmanagement');
 
   const handleAttendanceSubmit = () => {
     if (passcode === "SSN2025") {
@@ -62,6 +134,8 @@ const TeamsPage = () => {
       setPasscode("");
     }
   };
+
+  const vertical = coreTeamVerticals[activeVertical];
 
   return (
     <MainLayout>
@@ -85,15 +159,81 @@ const TeamsPage = () => {
           </button>
         </div>
 
-        {/* Core Team */}
+        {/* Core Team - New UI matching Clubs */}
         {selectedTab === "core" && (
-          <div className="core-team">
-            {Object.entries(coreTeam).map(([vertical, desc], idx) => (
-              <div className="vertical-section" key={idx}>
-                <h3>{vertical}</h3>
-                <p>{desc}</p>
+          <div className="core-team-new">
+            
+            {/* Intro */}
+            <div className="core-intro-new">
+              <p>
+                The National Service Scheme (NSS) at SSN College of Engineering operates through 
+                well-defined verticals to ensure that every activity is planned, executed, documented, 
+                and communicated efficiently. Each vertical plays a crucial role in transforming service 
+                ideas into impactful action while maintaining discipline, transparency, and professionalism.
+              </p>
+            </div>
+
+            {/* Vertical Selector */}
+            <div className="vertical-selector">
+              {Object.keys(coreTeamVerticals).map((key) => (
+                <button
+                  key={key}
+                  className={`vertical-selector-btn ${activeVertical === key ? 'active' : ''}`}
+                  onClick={() => setActiveVertical(key)}
+                  style={{
+                    borderColor: activeVertical === key ? coreTeamVerticals[key].color : '#003366'
+                  }}
+                >
+                  {coreTeamVerticals[key].name}
+                </button>
+              ))}
+            </div>
+
+            {/* Vertical Content */}
+            <div className="vertical-content">
+              
+              {/* Vertical Header */}
+              <div 
+                className="vertical-content-header"
+                style={{ backgroundColor: vertical.color }}
+              >
+                <h1>{vertical.name}</h1>
               </div>
-            ))}
+
+              {/* Role/Overview */}
+              <div className="vertical-section-content role-section">
+                <h2>Role Overview</h2>
+                <p>{vertical.role}</p>
+              </div>
+
+              {/* Responsibilities */}
+              <div className="vertical-section-content responsibilities-section">
+                <h2>Responsibilities</h2>
+                {vertical.responsibilities.map((resp, idx) => (
+                  <div key={idx} className="responsibility-block">
+                    <h3>{resp.phase}</h3>
+                    <div className="responsibility-list">
+                      {resp.items.map((item, itemIdx) => (
+                        <div key={itemIdx} className="responsibility-item">
+                          <span className="check-mark">✓</span>
+                          <p>{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Join CTA */}
+              <div 
+                className="vertical-cta"
+                style={{ backgroundColor: vertical.color }}
+              >
+                <h2>Join {vertical.name}</h2>
+                <p>Be part of our operational excellence and make every NSS event successful!</p>
+              </div>
+
+            </div>
           </div>
         )}
 
