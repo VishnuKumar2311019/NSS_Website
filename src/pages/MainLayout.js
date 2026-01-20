@@ -27,7 +27,7 @@ const MainLayout = ({ children }) => {
         <div className="college-info">
           <h2>Sri Sivasubramaniya Nadar College of Engineering, Kalavakkam - 603110</h2>
           <p>(An Autonomous Institution, Affiliated to Anna University, Chennai)</p>
-          <h1>National Service Scheme (NSS) Unit of SSN</h1>
+          <h1>National Service Scheme (NSS)</h1>
           <div className="time-display">{currentTime.toLocaleString()}</div>
         </div>
 
