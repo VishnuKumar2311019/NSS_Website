@@ -124,7 +124,7 @@ const AnnualCampPage = () => {
             <h2>Gallery</h2>
             <div className="gallery-grid">
               {imageList.map((img, index) => (
-                <img key={index} src={img} alt={`Camp Photo ${index + 1}`} />
+                <img key={index} src={img} alt={`NSS Camp Day ${index + 1}`} />
               ))}
             </div>
           </section>
