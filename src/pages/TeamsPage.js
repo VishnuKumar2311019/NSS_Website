@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Bar } from "react-chartjs-2";
 import "./TeamsPage.css";
 import MainLayout from "./MainLayout";
+const TeamsPage = ({ defaultTab = "core" }) => {
+  const [activeTab, setActiveTab] = useState(defaultTab);
 import {
   Chart as ChartJS,
   CategoryScale,
