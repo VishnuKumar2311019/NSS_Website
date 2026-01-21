@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import MainLayout from './MainLayout';
+
 /* Load Google Font once */
 const fontLink = document.createElement('link');
 fontLink.href = "https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap";
@@ -10,27 +10,7 @@ fontLink.rel = 'stylesheet';
 document.head.appendChild(fontLink);
 
 const Home = () => {
-  const [highlights, setHighlights] = useState([]);
-  const [activities, setActivities] = useState([]);
   const [latestActivities, setLatestActivities] = useState([]);
-
-  /* Fetch trending (optional) */
-  useEffect(() => {
-    axios.get('https://nss-website-backend.onrender.com/admin/get-trending')
-      .then(response => setHighlights(response.data))
-      .catch(error => console.error("Error fetching highlights:", error));
-  }, []);
-
-  /* Fetch latest activities (ticker) */
-  useEffect(() => {
-    fetch("https://nss-website-backend.onrender.com/api/activities/latest")
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data)) setActivities(data);
-        else setActivities([]);
-      })
-      .catch(() => setActivities([]));
-  }, []);
 
   /* Fetch all activities */
   useEffect(() => {
@@ -51,10 +31,8 @@ const Home = () => {
         <h1 className="hero-text">Welcome to NSS UNIT OF SSN</h1>
       </div>
 
-      {/* TRENDING + ACTIVITIES */}
+      {/* ACTIVITIES */}
       <div className="trending-activities-wrapper">
-
-        {/* Activities Section */}
         <div className="activities-section">
           <h2>🟢 Latest Activities</h2>
           <div className="activities-box">
@@ -71,7 +49,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-
       </div>
 
       {/* MAIN SECTIONS */}
@@ -140,7 +117,7 @@ const Home = () => {
         </div>
       </div>
 
-  </MainLayout>
+    </MainLayout>
   );
 };
 
