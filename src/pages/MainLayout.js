@@ -64,7 +64,7 @@ const MainLayout = ({ children }) => {
 
           <li>
             <Link to="/annualcamp">
-              <TentTreeIcon size={18} /> Annual Camp
+              <TentTree size={18} /> Annual Camp
             </Link>
           </li>
 
