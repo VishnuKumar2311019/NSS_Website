@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ssnLogo from "../assets/ssn-logo.png";
 import nssLogo from "../assets/Nss-logo.png";
-import { Award, Users, Mail, Menu, X, TentTreeIcon, Image } from "lucide-react";
+import { Award, Users, Mail, Menu, X, TentTree, Image } from "lucide-react";
 import "../pages/Home.css"; // reuse existing styles
 
 const MainLayout = ({ children }) => {
