@@ -2,8 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ssnLogo from "../assets/ssn-logo.png";
 import nssLogo from "../assets/Nss-logo.png";
-import { Award, Users, Mail, Menu, X, TentTree, Image } from "lucide-react";
-import "../pages/Home.css"; // reuse existing styles
+import {
+  Award,
+  Users,
+  Mail,
+  Menu,
+  X,
+  TentTree,
+  Image,
+  HeartHandshake,
+} from "lucide-react";
+import "../pages/Home.css";
 
 const MainLayout = ({ children }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -18,39 +27,31 @@ const MainLayout = ({ children }) => {
 
   return (
     <>
-      {/* ===== BLUE BANNER ===== */}
+      {/* ===== BANNER ===== */}
       <div className="banner">
-        <div className="logo-container">
-          <img src={ssnLogo} alt="SSN College logo" className="logo" />
-        </div>
+        <img src={ssnLogo} alt="SSN Logo" className="logo" />
 
         <div className="college-info">
-          <h2>Sri Sivasubramaniya Nadar College of Engineering, Kalavakkam - 603110</h2>
-          <p>(An Autonomous Institution, Affiliated to Anna University, Chennai)</p>
           <h1>National Service Scheme (NSS)</h1>
+          <h2>
+            Sri Sivasubramaniya Nadar College of Engineering, Kalavakkam - 603110
+          </h2>
+          <p>(Autonomous, Anna University)</p>
           <div className="time-display">{currentTime.toLocaleString()}</div>
         </div>
 
-        <div className="nss-logo-container">
-          <img src={nssLogo} alt="National Service Scheme logo" className="nss-logo" />
-        </div>
+        <img src={nssLogo} alt="NSS Logo" className="nss-logo" />
       </div>
 
-      {/* ===== ANNOUNCEMENT BAR (NO MARQUEE) ===== */}
+      {/* ===== ANNOUNCEMENT ===== */}
       <div className="announcement-bar">
-        <div className="announcement-scroll">
-          🌟 Maintenance Visit – Sept 23 • 📢 Team Meet – Sept 23 • 🎉 Orientation – Sept 24
-        </div>
+        🌟 Maintenance Visit – Sept 23 • 📢 Team Meet – Sept 23 • 🎉 Orientation – Sept 24
       </div>
 
       {/* ===== NAVBAR ===== */}
       <nav className="top-nav">
-        <button
-          className="hamburger"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle navigation menu"
-        >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+        <button className="hamburger" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X /> : <Menu />}
         </button>
 
         <ul className={`nav-list ${isOpen ? "open" : ""}`}>
@@ -68,20 +69,30 @@ const MainLayout = ({ children }) => {
             </Link>
           </li>
 
+          {/* ===== TEAMS DROPDOWN ===== */}
           <li className="dropdown">
-            <button type="button" className="dropdown-trigger">
+            <span className="dropdown-trigger">
               <Users size={18} /> Teams ▾
-            </button>
+            </span>
             <ul className="dropdown-menu">
-              <li><Link to="/teams">Core Team</Link></li>
-              <li><Link to="/teams">Volunteers</Link></li>
+              <li><Link to="/teams/core">Core Team</Link></li>
+              <li><Link to="/teams/volunteers">Volunteers</Link></li>
             </ul>
           </li>
 
-          <li>
-            <Link to="/clubsPage">
-              <Image size={18} /> Clubs
-            </Link>
+          {/* ===== CLUBS DROPDOWN ===== */}
+          <li className="dropdown">
+            <span className="dropdown-trigger">
+              <HeartHandshake size={18} /> Clubs ▾
+            </span>
+            <ul className="dropdown-menu">
+              <li><Link to="/clubs/Nature">Nature Club</Link></li>
+              <li><Link to="/clubs/Sustainability">Sustainability Club</Link></li>
+              <li><Link to="/clubs/Electoral">Electoral Club</Link></li>
+              <li><Link to="/clubs/Tulir">Tulir Club</Link></li>
+              <li><Link to="/clubs/WISEWing">WISE Wing</Link></li>
+              <li><Link to="/clubs/DrugAwareness">Drug Awareness Club</Link></li>
+            </ul>
           </li>
 
           <li>
