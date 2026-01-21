@@ -1,156 +1,165 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import './ClubsPage.css';
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import MainLayout from './MainLayout';
-const { clubName } = useParams();
+import "./ClubsPage.css";
+import MainLayout from "./MainLayout";
 
-useEffect(() => {
-  if (clubName && clubs[clubName]) {
-    setActiveTab(clubName);
-  }
-}, [clubName]);
+/* ============================
+   CLUBS DATA
+============================ */
 
 const clubsData = {
   nature: {
     name: "🌿 Nature Club",
     color: "#10b981",
-    vision: "To foster a campus environment where the presence and well-being of diverse animal and bird species are protected, celebrated, and sustained.",
+    vision:
+      "To foster a campus environment where the presence and well-being of diverse animal and bird species are protected, celebrated, and sustained.",
     objectives: [
       "Restore and protect natural habitats on campus",
       "Support campus biodiversity and wildlife conservation",
       "Promote awareness about coexistence with nature",
-      "Collaborate with environmental experts and organizations"
+      "Collaborate with environmental experts and organizations",
     ],
     activities: [
-      { icon: "📸", title: "Wildlife Photography Initiatives", desc: "Wild Camera Events to document campus biodiversity" },
-      { icon: "🍽️", title: "Food & Water Stations", desc: "Setting up feeding stations for birds and animals" },
-      { icon: "🏠", title: "Nesting Boxes Installation", desc: "Installing safe nesting boxes across campus" },
-      { icon: "💰", title: "Fundraising Activities", desc: "Organizing fundraisers for campus animals" },
-      { icon: "🐾", title: "Animal Shelter Visits", desc: "Regular visits to local animal shelters" },
-      { icon: "🎤", title: "Expert Talks", desc: "Sessions by environmentalists and veterinarians" }
-    ]
+      { icon: "📸", title: "Wildlife Photography Initiatives", desc: "Documenting campus biodiversity" },
+      { icon: "🍽️", title: "Food & Water Stations", desc: "Feeding stations for birds and animals" },
+      { icon: "🏠", title: "Nesting Boxes Installation", desc: "Safe nesting across campus" },
+      { icon: "💰", title: "Fundraising Activities", desc: "Support for campus animals" },
+      { icon: "🐾", title: "Animal Shelter Visits", desc: "Visits to local shelters" },
+      { icon: "🎤", title: "Expert Talks", desc: "Sessions by environmentalists" },
+    ],
   },
+
   sustainability: {
     name: "♻️ Sustainability Club",
     color: "#0ea5e9",
-    vision: "To inspire students to understand and apply the 17 Sustainable Development Goals (SDGs) and adopt sustainable practices in daily life.",
+    vision:
+      "To inspire students to understand and apply Sustainable Development Goals (SDGs) and adopt sustainable practices.",
     objectives: [
-      "Promote environmental responsibility and sustainability",
-      "Reduce resource consumption and encourage recycling",
-      "Spread awareness on climate change and eco-friendly living",
-      "Encourage research and application of sustainable technologies"
+      "Promote environmental responsibility",
+      "Reduce resource consumption",
+      "Spread awareness on climate change",
+      "Encourage sustainable technologies",
     ],
     activities: [
-      { icon: "🎉", title: "Sustainability Week Celebrations", desc: "Week-long events promoting sustainable living" },
-      { icon: "👣", title: "Carbon Footprint Calculation", desc: "Activities to measure environmental impact" },
-      { icon: "🌍", title: "SDG Awareness Sessions", desc: "Educational programs on sustainable development goals" },
-      { icon: "♻️", title: "Best Out of Waste Competitions", desc: "Creative recycling and upcycling contests" },
-      { icon: "📱", title: "Sustainability Campaigns", desc: "Awareness reels and social media content" }
-    ]
+      { icon: "🎉", title: "Sustainability Week", desc: "Week-long awareness events" },
+      { icon: "👣", title: "Carbon Footprint", desc: "Measuring environmental impact" },
+      { icon: "🌍", title: "SDG Awareness", desc: "Educational sessions" },
+      { icon: "♻️", title: "Best Out of Waste", desc: "Recycling competitions" },
+      { icon: "📱", title: "Digital Campaigns", desc: "Online sustainability outreach" },
+    ],
   },
+
   electoral: {
     name: "🗳️ Electoral Club",
     color: "#f59e0b",
-    vision: "To empower college students with awareness of the electoral process and foster active civic participation.",
+    vision:
+      "To empower college students with awareness of the electoral process and foster civic participation.",
     objectives: [
-      "Encourage student participation in democratic processes",
-      "Promote voter registration and electoral awareness",
-      "Educate students on voting rights and responsibilities",
-      "Strengthen civic consciousness among youth"
+      "Encourage democratic participation",
+      "Promote voter registration",
+      "Educate on voting rights",
+      "Strengthen civic responsibility",
     ],
     activities: [
-      { icon: "🆔", title: "Voter ID Registration Campaigns", desc: "Helping students register as voters" },
-      { icon: "🗳️", title: "Mock Elections", desc: "Conducting simulated elections within campus" },
-      { icon: "🎤", title: "Awareness Talks", desc: "Sessions on elections and governance" },
-      { icon: "❓", title: "Quizzes on Democracy", desc: "Interactive quizzes on Indian polity" },
-      { icon: "📊", title: "Electoral Surveys", desc: "Conducting awareness surveys among students" }
-    ]
+      { icon: "🆔", title: "Voter ID Drives", desc: "Helping students register" },
+      { icon: "🗳️", title: "Mock Elections", desc: "Campus elections" },
+      { icon: "🎤", title: "Awareness Talks", desc: "Democracy sessions" },
+      { icon: "❓", title: "Quizzes", desc: "Interactive civic quizzes" },
+      { icon: "📊", title: "Surveys", desc: "Electoral awareness surveys" },
+    ],
   },
+
   tulir: {
     name: "🌾 Tulir Club (Organic Farming)",
     color: "#84cc16",
-    vision: "To inspire a culture of organic farming among students and encourage eco-friendly agricultural practices.",
+    vision:
+      "To inspire organic farming and eco-friendly agricultural practices.",
     objectives: [
-      "Educate students on the importance of organic farming",
-      "Provide hands-on farming experience",
-      "Promote sustainable food practices",
-      "Build collaboration with organic farmers and experts"
+      "Educate on organic farming",
+      "Hands-on farming experience",
+      "Promote sustainable food",
+      "Collaborate with farmers",
     ],
     activities: [
-      { icon: "🌱", title: "Organic Farming Plot", desc: "Establishing and maintaining campus farm plots" },
-      { icon: "👨‍🌾", title: "Hands-on Workshops", desc: "Live demonstrations and practical training" },
-      { icon: "🚜", title: "Farm Visits", desc: "Interaction with organic farmers" },
-      { icon: "🎊", title: "Harvest Festivals", desc: "Celebrating harvest and seed festivals" },
-      { icon: "📚", title: "Guest Lectures", desc: "Sessions on sustainable agriculture" }
-    ]
+      { icon: "🌱", title: "Organic Plots", desc: "Campus farming plots" },
+      { icon: "👨‍🌾", title: "Workshops", desc: "Practical farming training" },
+      { icon: "🚜", title: "Farm Visits", desc: "Field exposure" },
+      { icon: "🎊", title: "Harvest Festivals", desc: "Celebrating harvest" },
+      { icon: "📚", title: "Guest Lectures", desc: "Agriculture experts" },
+    ],
   },
+
   wisewing: {
-    name: "👩‍🦰 Wise Wing (Women Empowerment)",
+    name: "👩‍🦰 WISE Wing",
     color: "#ec4899",
-    vision: "To build a society where women are self-reliant, valued contributors to social progress, and agents of positive change.",
-    mission: "To create a supportive platform for young women to lead community service initiatives while fostering inclusivity, equality, and social responsibility.",
+    vision:
+      "To build a society where women are empowered and valued contributors.",
+    mission:
+      "To create a supportive platform fostering equality, leadership, and inclusivity.",
     objectives: [
-      "Create a safe and supportive community within campus",
-      "Promote awareness on women's rights and health",
-      "Encourage leadership and skill development",
-      "Support underprivileged women and communities"
+      "Safe campus environment",
+      "Women's rights awareness",
+      "Leadership development",
+      "Support underprivileged women",
     ],
     activities: [
-      { icon: "📢", title: "Awareness Campaigns", desc: "Campaigns on women's issues and rights" },
-      { icon: "🏥", title: "Health Programs", desc: "Health and hygiene awareness sessions" },
-      { icon: "🎗️", title: "Breast Cancer Awareness", desc: "Educational initiatives on early detection" },
-      { icon: "💼", title: "Skill Development Workshops", desc: "Leadership and professional skill building" }
-    ]
+      { icon: "📢", title: "Awareness Campaigns", desc: "Women's issues" },
+      { icon: "🏥", title: "Health Programs", desc: "Hygiene & health" },
+      { icon: "🎗️", title: "Cancer Awareness", desc: "Early detection education" },
+      { icon: "💼", title: "Skill Workshops", desc: "Professional skills" },
+    ],
   },
+
   drugawareness: {
     name: "🚫 Drug Awareness Club",
     color: "#ef4444",
-    vision: "To create a drug-free campus environment and educate students about the dangers of substance abuse.",
+    vision:
+      "To create a drug-free campus and educate students about substance abuse.",
     objectives: [
-      "Raise awareness about drug abuse and its consequences",
-      "Provide support systems for affected individuals",
-      "Conduct preventive education programs",
-      "Collaborate with healthcare professionals and counselors"
+      "Drug abuse awareness",
+      "Support systems",
+      "Preventive education",
+      "Healthcare collaboration",
     ],
     activities: [
-      { icon: "📚", title: "Educational Sessions", desc: "Awareness talks on drug abuse prevention" },
-      { icon: "🎬", title: "Documentary Screenings", desc: "Films highlighting impact of substance abuse" },
-      { icon: "🤝", title: "Peer Support Programs", desc: "Creating support networks among students" },
-      { icon: "👨‍⚕️", title: "Expert Consultations", desc: "Sessions with healthcare professionals" },
-      { icon: "📝", title: "Awareness Campaigns", desc: "Posters, drives, and social media outreach" }
-    ]
-  }
+      { icon: "📚", title: "Educational Sessions", desc: "Prevention talks" },
+      { icon: "🎬", title: "Documentary Screenings", desc: "Impact films" },
+      { icon: "🤝", title: "Peer Support", desc: "Student networks" },
+      { icon: "👨‍⚕️", title: "Expert Consultations", desc: "Medical guidance" },
+      { icon: "📝", title: "Campaigns", desc: "Posters & outreach" },
+    ],
+  },
 };
 
+/* ============================
+   COMPONENT
+============================ */
+
 const ClubsPage = () => {
-  const location = useLocation();
-  const [activeClub, setActiveClub] = useState('nature');
+  const { clubName } = useParams(); // ✅ SAFE
+  const [activeClub, setActiveClub] = useState("nature");
 
   useEffect(() => {
-    // Get club from URL query parameter (e.g., /clubs?club=sustainability)
-    const params = new URLSearchParams(location.search);
-    const club = params.get('club');
-    if (club && clubsData[club]) {
-      setActiveClub(club);
+    if (clubName && clubsData[clubName.toLowerCase()]) {
+      setActiveClub(clubName.toLowerCase());
     }
-  }, [location]);
+  }, [clubName]);
 
   const club = clubsData[activeClub];
 
   return (
     <MainLayout>
       <div className="clubs-page">
-        
-        {/* Club Selector */}
+
+        {/* CLUB SELECTOR */}
         <div className="club-selector">
           {Object.keys(clubsData).map((key) => (
             <button
               key={key}
-              className={`club-selector-btn ${activeClub === key ? 'active' : ''}`}
+              className={`club-selector-btn ${activeClub === key ? "active" : ""}`}
               onClick={() => setActiveClub(key)}
               style={{
-                borderColor: activeClub === key ? clubsData[key].color : '#003366'
+                borderColor: activeClub === key ? clubsData[key].color : "#003366",
               }}
             >
               {clubsData[key].name}
@@ -158,64 +167,58 @@ const ClubsPage = () => {
           ))}
         </div>
 
-        {/* Club Content */}
+        {/* CLUB CONTENT */}
         <div className="club-content">
-          
-          {/* Club Header */}
-          <div 
+
+          <div
             className="club-header"
             style={{ backgroundColor: club.color }}
           >
             <h1>{club.name}</h1>
           </div>
 
-          {/* Vision */}
-          <div className="club-section vision-section">
+          <div className="club-section">
             <h2>Vision</h2>
             <p>{club.vision}</p>
           </div>
 
-          {/* Mission (if exists) */}
           {club.mission && (
-            <div className="club-section mission-section">
+            <div className="club-section">
               <h2>Mission</h2>
               <p>{club.mission}</p>
             </div>
           )}
 
-          {/* Objectives */}
-          <div className="club-section objectives-section">
+          <div className="club-section">
             <h2>Objectives</h2>
             <div className="objectives-list">
-              {club.objectives.map((obj, idx) => (
-                <div key={idx} className="objective-item">
+              {club.objectives.map((o, i) => (
+                <div key={i} className="objective-item">
                   <span className="check-mark">✓</span>
-                  <p>{obj}</p>
+                  <p>{o}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Activities */}
-          <div className="club-section activities-section">
+          <div className="club-section">
             <h2>Our Activities</h2>
             <div className="activities-grid">
-              {club.activities.map((activity, idx) => (
-                <div 
-                  key={idx} 
+              {club.activities.map((a, i) => (
+                <div
+                  key={i}
                   className="activity-card"
                   style={{ borderLeftColor: club.color }}
                 >
-                  <div className="activity-icon">{activity.icon}</div>
-                  <h3>{activity.title}</h3>
-                  <p>{activity.desc}</p>
+                  <div className="activity-icon">{a.icon}</div>
+                  <h3>{a.title}</h3>
+                  <p>{a.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Join CTA */}
-          <div 
+          <div
             className="club-cta"
             style={{ backgroundColor: club.color }}
           >
