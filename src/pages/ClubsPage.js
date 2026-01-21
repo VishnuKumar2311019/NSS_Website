@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import './ClubsPage.css';
+import { useParams } from "react-router-dom";
 import MainLayout from './MainLayout';
+const { clubName } = useParams();
+
+useEffect(() => {
+  if (clubName && clubs[clubName]) {
+    setActiveTab(clubName);
+  }
+}, [clubName]);
 
 const clubsData = {
   nature: {
