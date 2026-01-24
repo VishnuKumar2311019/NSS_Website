@@ -369,7 +369,7 @@ const TeamsPage = () => {
                   </a>
                 </div>
                
-              )
+              )}
             </div>
 
             {showAttendancePrompt && (
