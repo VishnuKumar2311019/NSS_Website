@@ -340,15 +340,36 @@ const TeamsPage = () => {
                   View Attendance Sheets
                 </button>
               ) : (
-                <a
-                  href="https://docs.google.com/spreadsheets/d/1DFk62phy0veBHnJj3saI96LiyS-zV3GYp92mnYSgt5k/edit?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="attendance-btn"
-                >
-                  Open Attendance Sheet
-                </a>
-              )}
+                <div className="attendance-links">
+                  <h4>Select Year</h4>
+
+                  <a
+                    href="#"
+                    className="attendance-btn"
+                  >
+                    📘 First Year Attendance
+                  </a>
+
+                  <a
+                    href="https://docs.google.com/spreadsheets/d/1HBx1zccr7rSksv-H9IbO2U292MaUhar70t-PUkQ_Ulc/edit?gid=1040787099#gid=1040787099"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="attendance-btn"
+                  >
+                    📗 Second Year Attendance
+                  </a>
+
+                  <a
+                    href="https://docs.google.com/spreadsheets/d/1DFk62phy0veBHnJj3saI96LiyS-zV3GYp92mnYSgt5k/edit?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="attendance-btn"
+                  >
+                    📙 Third Year Attendance
+                  </a>
+                </div>
+               
+              )
             </div>
 
             {showAttendancePrompt && (
