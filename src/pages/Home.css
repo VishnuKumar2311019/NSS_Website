@@ -27,16 +27,6 @@ a {
   background: #ffffff;
 }
 
-.read-more {
-  display: inline-block;
-  margin-top: 8px;
-  color: #b30000;
-  font-weight: 500;
-}
-.read-more:hover {
-  color: #1a237e;
-}
-
 /* =======================
    BANNER
 ======================= */
@@ -70,12 +60,13 @@ a {
 .college-info h2 {
   font-size: 1rem;
   margin: 5px 0;
+  color: #cadef3;
 }
 
 .time-display {
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 0.9rem;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 /* =======================
@@ -85,7 +76,7 @@ a {
   background: #b30000;
   color: white;
   font-weight: 500;
-  padding: 6px;
+  padding: 8px;
   font-size: 0.95rem;
 }
 
@@ -94,9 +85,8 @@ a {
 ======================= */
 .top-nav {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1rem;
   background: #003366;
   position: sticky;
   top: 0;
@@ -111,60 +101,110 @@ a {
   padding: 0;
 }
 
-.nav-list li a {
-  color: #fff;
+.nav-list li {
+  position: relative;
+}
+
+.nav-list li a,
+.dropdown > span {
+  color: #ffffff;
   font-weight: 600;
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
 }
 
 .nav-list li a:hover,
-.nav-list li.active a {
+.dropdown > span:hover {
   background: linear-gradient(135deg, #005792, #6697e4);
 }
 
-/* Login Button */
+/* =======================
+   DROPDOWN (FIXED)
+======================= */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 115%;
+  left: 0;
+  background: #ffffff;
+  list-style: none;
+  padding: 8px 0;
+  min-width: 220px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  z-index: 10000;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 16px;
+  color: #003366;       /* ✅ FIX: NOT BLACK */
+  font-weight: 500;
+}
+
+.dropdown-menu li a:hover {
+  background: #cadef3;
+  color: #003366;
+}
+
+/* =======================
+   LOGIN BUTTON
+======================= */
 .login-button {
   margin-left: auto;
 }
 
-.login-button .login-btn {
+.login-btn {
   background-color: #084179;
   color: white;
   border: none;
-  padding: 8px 18px;
+  padding: 8px 20px;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
 }
 
-.login-button .login-btn:hover {
+.login-btn:hover {
   background: linear-gradient(135deg, #005792, #6697e4);
 }
 
-/* Hamburger */
+/* =======================
+   HAMBURGER
+======================= */
 .hamburger {
   display: none;
   background: none;
   border: none;
+  color: white;
   cursor: pointer;
 }
 
-/* Mobile Menu */
+/* =======================
+   MOBILE NAVBAR
+======================= */
 @media (max-width: 768px) {
   .hamburger {
-    display: flex;
+    display: block;
   }
 
   .nav-list {
     position: absolute;
-    top: 60px;
+    top: 100%;
     right: 0;
     flex-direction: column;
     background: #003366;
+    width: 240px;
     padding: 1rem;
-    width: 220px;
     transform: translateX(100%);
+    transition: transform 0.3s ease;
   }
 
   .nav-list.open {
@@ -178,39 +218,20 @@ a {
   .mobile-login {
     display: block;
   }
+
+  .dropdown-menu {
+    position: static;
+    background: #084179;
+    box-shadow: none;
+  }
+
+  .dropdown-menu li a {
+    color: #ffffff;
+  }
 }
 
 .mobile-login {
   display: none;
-}
-
-/* Dropdown */
-.dropdown {
-  position: relative;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: white;
-  list-style: none;
-  padding: 10px;
-  border-radius: 8px;
-  min-width: 250px;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-.dropdown-menu li a {
-  color: #333;
-}
-
-.dropdown-menu li a:hover {
-  background: #cadef3;
 }
 
 /* =======================
@@ -234,7 +255,7 @@ a {
 }
 
 /* =======================
-   MAIN CONTENT SECTIONS
+   MAIN CONTENT
 ======================= */
 section {
   background: white;
@@ -244,6 +265,7 @@ section {
   border-radius: 15px;
   border-left: 7px solid #003366;
 }
+
 section h2 {
   color: #003366;
 }
@@ -267,15 +289,4 @@ section h2 {
 .social-icons img {
   width: 35px;
   height: 35px;
-}
-
-/* ===============================
-   🚫 REMOVE DUPLICATE MENU IN BANNER
-================================ */
-
-/* THIS IS THE KEY FIX */
-.banner a,
-.banner ul,
-.banner nav {
-  display: none !important;
 }
