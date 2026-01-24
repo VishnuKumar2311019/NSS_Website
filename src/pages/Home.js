@@ -34,7 +34,7 @@ const Home = () => {
       {/* ACTIVITIES */}
       <div className="trending-activities-wrapper">
         <div className="activities-section">
-          <h2>🟢 Latest Activities</h2>
+          <h2>🎉 Latest Activities</h2>
           <div className="activities-box">
             <div className="scroll-container">
               {latestActivities.length === 0 ? (
