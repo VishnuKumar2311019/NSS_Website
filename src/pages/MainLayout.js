@@ -107,13 +107,6 @@ const MainLayout = ({ children }) => {
             </Link>
           </li>
 
-          <li className="mobile-login">
-            <Link to="/login">
-              <button className="login-btn">Login</button>
-            </Link>
-          </li>
-        </ul>
-
         <div className="login-button">
           <Link to="/login">
             <button className="login-btn">Login</button>
