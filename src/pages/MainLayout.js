@@ -106,7 +106,7 @@ const MainLayout = ({ children }) => {
               <Mail size={18} /> Contact
             </Link>
           </li>
-
+        </ul>
         <div className="login-button">
           <Link to="/login">
             <button className="login-btn">Login</button>
