@@ -4,6 +4,7 @@
 * {
   transition: all 0.3s ease-in-out;
   scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 body {
@@ -11,6 +12,12 @@ body {
   font-family: 'Poppins', sans-serif;
   background: #ffffff;
   color: #222;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 h1, h2, h3 {
@@ -123,7 +130,7 @@ a {
 }
 
 /* =======================
-   DROPDOWN (FIXED)
+   DROPDOWN
 ======================= */
 .dropdown-menu {
   display: none;
@@ -146,7 +153,7 @@ a {
 .dropdown-menu li a {
   display: block;
   padding: 10px 16px;
-  color: #003366;       /* ✅ FIX: NOT BLACK */
+  color: #003366;
   font-weight: 500;
 }
 
@@ -188,53 +195,6 @@ a {
 }
 
 /* =======================
-   MOBILE NAVBAR
-======================= */
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-
-  .nav-list {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    flex-direction: column;
-    background: #003366;
-    width: 240px;
-    padding: 1rem;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-  }
-
-  .nav-list.open {
-    transform: translateX(0);
-  }
-
-  .login-button {
-    display: none;
-  }
-
-  .mobile-login {
-    display: block;
-  }
-
-  .dropdown-menu {
-    position: static;
-    background: #084179;
-    box-shadow: none;
-  }
-
-  .dropdown-menu li a {
-    color: #ffffff;
-  }
-}
-
-.mobile-login {
-  display: none;
-}
-
-/* =======================
    HERO SECTION
 ======================= */
 .hero-section {
@@ -252,6 +212,7 @@ a {
   font-weight: 700;
   color: white;
   text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+  text-align: center;
 }
 
 /* =======================
@@ -284,9 +245,115 @@ section h2 {
   display: flex;
   justify-content: center;
   gap: 18px;
+  flex-wrap: wrap;
 }
 
 .social-icons img {
   width: 35px;
   height: 35px;
+}
+
+/* =====================================================
+   ✅ MOBILE OPTIMIZATION (ONLY FOR PHONES)
+===================================================== */
+@media (max-width: 768px) {
+
+  /* Banner */
+  .banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .logo,
+  .nss-logo {
+    height: 60px;
+  }
+
+  .college-info h1 {
+    font-size: 1.2rem;
+  }
+
+  .college-info h2 {
+    font-size: 0.85rem;
+  }
+
+  .time-display {
+    font-size: 0.75rem;
+  }
+
+  /* Navbar */
+  .hamburger {
+    display: block;
+    margin-left: auto;
+  }
+
+  .nav-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    flex-direction: column;
+    background: #003366;
+    width: 240px;
+    padding: 1rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    gap: 0.8rem;
+  }
+
+  .nav-list.open {
+    transform: translateX(0);
+  }
+
+  .nav-list li a {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .login-button {
+    display: none;
+  }
+
+  .mobile-login {
+    display: block;
+  }
+
+  .dropdown-menu {
+    position: static;
+    background: #084179;
+    box-shadow: none;
+  }
+
+  .dropdown-menu li a {
+    color: white;
+  }
+
+  /* Hero */
+  .hero-text {
+    font-size: 1.4rem;
+    top: 40px;
+    width: 90%;
+  }
+
+  /* Sections */
+  section {
+    margin: 10px;
+    padding: 18px;
+    border-left: 5px solid #003366;
+  }
+
+  section h2 {
+    font-size: 1.1rem;
+  }
+
+  /* Footer */
+  .footer-social {
+    padding: 20px;
+  }
+
+  .social-icons img {
+    width: 28px;
+    height: 28px;
+  }
 }
