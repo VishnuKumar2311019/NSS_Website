@@ -244,10 +244,15 @@ a {
 ======================= */
 @media (max-width: 768px) {
   .hero-section {
-    min-height: 45vh;
-    max-height: 55vh;
     background: url("../assets/camp-gallery/NssGroupPhoto.png") no-repeat center center / cover;
     overflow: hidden;
+    width: 100%;
+   max-width: 1000px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-hover);
   }
 
   .hero-text {
