@@ -77,7 +77,7 @@ a {
 }
 
 /* =========================
-   NAVBAR
+   NAVBAR CLEAN FIX
 ========================= */
 .top-nav {
   width: 100%;
@@ -90,18 +90,21 @@ a {
   z-index: 1000;
 }
 
-/* NAV LINKS */
 .nav-list {
-  list-style: none;
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  margin-left: 10px;
 }
 
-/* FIX FOR TEAMS & CLUBS COLOR */
-.nav-list > li > a {
-  color:white;
+.top-nav .nav-list > li {
+  list-style: none;
+}
+
+.top-nav .nav-list > li > a {
+  color: #ffffff !important;
   font-weight: 600;
   padding: 8px 12px;
   border-radius: 6px;
@@ -110,7 +113,7 @@ a {
   gap: 6px;
 }
 
-.nav-list > li > a:hover {
+.top-nav .nav-list > li > a:hover {
   background: linear-gradient(135deg, #005792, #6697e4);
 }
 
