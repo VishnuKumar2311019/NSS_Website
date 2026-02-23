@@ -77,7 +77,7 @@ a {
 }
 
 /* =========================
-   NAVBAR FIX (FINAL)
+   NAVBAR (CLEAN FIX)
 ========================= */
 
 .top-nav {
@@ -100,29 +100,34 @@ a {
   align-items: center;
 }
 
-/* FORCE ALL NAV TEXT + ICONS WHITE */
-.top-nav .nav-list li,
-.top-nav .nav-list li a,
-.top-nav .nav-list li span {
-  color: #ffffff !important;
+/* Default nav links */
+.nav-list > li > a {
+  color: #ffffff;
   font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-/* ICON FIX (lucide icons use currentColor) */
-.top-nav svg {
-  color: #ffffff !important;
-  stroke: #ffffff !important;
+/* ONLY fix dropdown parent (Teams & Clubs) */
+.nav-list > li.dropdown > a,
+.nav-list > li.dropdown > span {
+  color: #ffffff;
+}
+
+/* Icons inside nav */
+.nav-list > li > a svg {
+  color: #ffffff;
+  stroke: #ffffff;
 }
 
 /* Hover */
-.top-nav .nav-list li a:hover,
-.top-nav .nav-list li span:hover {
+.nav-list > li > a:hover,
+.nav-list > li.dropdown > a:hover,
+.nav-list > li.dropdown > span:hover {
   background: linear-gradient(135deg, #005792, #6697e4);
-  padding: 8px 12px;
-  border-radius: 6px;
 }
 /* LOGIN BUTTON */
 .login-button {
