@@ -104,7 +104,7 @@ a {
 }
 
 .top-nav .nav-list > li > a {
-  color: #ffffff !important;
+  color: white!important;
   font-weight: 600;
   padding: 8px 12px;
   border-radius: 6px;
