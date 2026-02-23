@@ -1,11 +1,10 @@
-/* =======================
-   GLOBAL
-======================= */
+/* =========================
+   GLOBAL RESET
+========================= */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
 body {
@@ -21,13 +20,15 @@ a {
 }
 
 .home-wrapper {
-  background: #ffffff;
+  width: 100%;
+  overflow-x: hidden;
 }
 
-/* =======================
-   BANNER (DESKTOP)
-======================= */
+/* =========================
+   BANNER
+========================= */
 .banner {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,51 +60,61 @@ a {
 }
 
 .time-display {
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 0.9rem;
   font-weight: 600;
 }
 
-/* =======================
-   ANNOUNCEMENT
-======================= */
+/* =========================
+   ANNOUNCEMENT BAR
+========================= */
 .announcement-bar {
+  width: 100%;
   background: #b30000;
   color: white;
-  padding: 8px;
-  font-size: 0.95rem;
+  padding: 8px 12px;
+  font-size: 0.9rem;
 }
 
-/* =======================
-   NAVBAR (DESKTOP)
-======================= */
+/* =========================
+   NAVBAR
+========================= */
 .top-nav {
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 0.6rem 1rem;
   background: #003366;
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 1000;
 }
 
+/* NAV LINKS */
 .nav-list {
+  list-style: none;
   display: flex;
   gap: 1.5rem;
-  list-style: none;
+  align-items: center;
+  margin-left: 10px;
 }
 
-.nav-list li a {
-  color: white;
+/* FIX FOR TEAMS & CLUBS COLOR */
+.nav-list > li > a {
+  color: #ffffff !important;
   font-weight: 600;
   padding: 8px 12px;
   border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.nav-list li a:hover {
+.nav-list > li > a:hover {
   background: linear-gradient(135deg, #005792, #6697e4);
 }
 
+/* LOGIN BUTTON */
 .login-button {
   margin-left: auto;
 }
@@ -122,7 +133,9 @@ a {
   background: linear-gradient(135deg, #005792, #6697e4);
 }
 
-/* Dropdown */
+/* =========================
+   DROPDOWN
+========================= */
 .dropdown {
   position: relative;
 }
@@ -130,13 +143,14 @@ a {
 .dropdown-menu {
   display: none;
   position: absolute;
-  top: 100%;
+  top: 110%;
   left: 0;
   background: white;
   list-style: none;
-  padding: 10px;
+  padding: 10px 0;
   border-radius: 8px;
   min-width: 220px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 .dropdown:hover .dropdown-menu {
@@ -145,18 +159,20 @@ a {
 
 .dropdown-menu li a {
   color: #003366;
+  padding: 8px 15px;
   display: block;
-  padding: 6px 10px;
+  font-weight: 500;
 }
 
 .dropdown-menu li a:hover {
   background: #cadef3;
 }
 
-/* =======================
-   HERO (DESKTOP)
-======================= */
+/* =========================
+   HERO SECTION
+========================= */
 .hero-section {
+  width: 100%;
   min-height: 60vh;
   background: url("../assets/camp-gallery/NssGroupPhoto.png") no-repeat center/cover;
   position: relative;
@@ -167,15 +183,16 @@ a {
   top: 60px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-weight: 700;
   color: white;
   text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+  text-align: center;
 }
 
-/* =======================
+/* =========================
    TRENDING + ACTIVITIES
-======================= */
+========================= */
 .trending-activities-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -208,18 +225,17 @@ a {
 
 .ticker-item:hover {
   color: #d32f2f;
-  transform: translateX(6px);
 }
 
-/* =======================
+/* =========================
    MAIN SECTIONS
-======================= */
+========================= */
 section {
   background: white;
   margin: 20px;
   padding: 30px;
   border-radius: 15px;
-  border-left: 7px solid #003366;
+  border-left: 6px solid #003366;
 }
 
 section h2 {
@@ -233,9 +249,9 @@ blockquote {
   font-style: italic;
 }
 
-/* =======================
+/* =========================
    FOOTER
-======================= */
+========================= */
 .footer-social {
   text-align: center;
   padding: 30px;
@@ -251,13 +267,12 @@ blockquote {
 }
 
 .social-icons img {
-  width: 35px;
-  height: 35px;
+  width: 32px;
 }
 
-/* =====================================================
-   MOBILE (ONLY ONE BREAKPOINT)
-===================================================== */
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
 @media (max-width: 768px) {
 
   .banner {
@@ -279,6 +294,7 @@ blockquote {
     font-size: 0.85rem;
   }
 
+  /* HAMBURGER */
   .hamburger {
     display: block;
     margin-left: auto;
@@ -287,14 +303,18 @@ blockquote {
     color: white;
   }
 
+  /* SLIDE MENU FIX */
   .nav-list {
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     right: 0;
-    flex-direction: column;
+    height: 100vh;
+    width: 75%;
+    max-width: 280px;
     background: #003366;
-    width: 240px;
-    padding: 1rem;
+    flex-direction: column;
+    padding: 80px 20px;
+    gap: 20px;
     transform: translateX(100%);
     transition: transform 0.3s ease;
   }
@@ -303,13 +323,16 @@ blockquote {
     transform: translateX(0);
   }
 
+  .nav-list > li > a {
+    font-size: 1rem;
+  }
+
   .login-button {
     display: none;
   }
 
   .mobile-login {
     display: block;
-    margin-top: 10px;
   }
 
   .hero-section {
@@ -320,7 +343,6 @@ blockquote {
     font-size: 1.4rem;
     top: 30px;
     width: 90%;
-    text-align: center;
   }
 
   .trending-activities-wrapper {
@@ -328,12 +350,11 @@ blockquote {
   }
 
   section {
-    margin: 10px;
+    margin: 15px;
     padding: 20px;
   }
 
   .social-icons img {
-    width: 28px;
-    height: 28px;
+    width: 26px;
   }
 }
