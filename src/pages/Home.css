@@ -77,8 +77,9 @@ a {
 }
 
 /* =========================
-   NAVBAR CLEAN FIX
+   NAVBAR FIX (FINAL)
 ========================= */
+
 .top-nav {
   width: 100%;
   display: flex;
@@ -91,7 +92,7 @@ a {
 }
 
 .nav-list {
-  list-style: none !important;
+  list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
@@ -99,24 +100,30 @@ a {
   align-items: center;
 }
 
-.top-nav .nav-list > li {
-  list-style: none;
-}
-
-.top-nav .nav-list > li > a {
-  color: white!important;
+/* FORCE ALL NAV TEXT + ICONS WHITE */
+.top-nav .nav-list li,
+.top-nav .nav-list li a,
+.top-nav .nav-list li span {
+  color: #ffffff !important;
   font-weight: 600;
-  padding: 8px 12px;
-  border-radius: 6px;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.top-nav .nav-list > li > a:hover {
-  background: linear-gradient(135deg, #005792, #6697e4);
+/* ICON FIX (lucide icons use currentColor) */
+.top-nav svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
 }
 
+/* Hover */
+.top-nav .nav-list li a:hover,
+.top-nav .nav-list li span:hover {
+  background: linear-gradient(135deg, #005792, #6697e4);
+  padding: 8px 12px;
+  border-radius: 6px;
+}
 /* LOGIN BUTTON */
 .login-button {
   margin-left: auto;
