@@ -101,7 +101,7 @@ a {
 
 /* FIX FOR TEAMS & CLUBS COLOR */
 .nav-list > li > a {
-  color: #ffffff !important;
+  color:white;
   font-weight: 600;
   padding: 8px 12px;
   border-radius: 6px;
