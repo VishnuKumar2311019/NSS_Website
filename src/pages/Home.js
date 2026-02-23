@@ -102,7 +102,7 @@ const Home = () => {
           <a href="https://instagram.com/nssofssn" target="_blank" rel="noreferrer">
             <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" />
           </a>
-          <a href="https://www.youtube.com/@nssofficial5737" target="_blank" rel="noreferrer">
+          <a href="https://www.youtube.com/@nssofssn" target="_blank" rel="noreferrer">
             <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
           </a>
           <a href="https://x.com/SSNNSS579516641" target="_blank" rel="noreferrer">
