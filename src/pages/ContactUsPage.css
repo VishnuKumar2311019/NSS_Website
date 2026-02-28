@@ -1,156 +1,167 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+/* ============================================================
+   CONTACT US PAGE — NSS SSN v2.0
+============================================================ */
 
-/* =======================
-   PAGE BACKGROUND
-======================= */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary:       #003366;
+  --primary-light: #005792;
+  --primary-pale:  #cadef3;
+  --accent:        #b30000;
+  --success:       #059669;
+  --white:         #ffffff;
+  --off-white:     #f0f5fc;
+  --text-dark:     #1a2233;
+  --text-mid:      #3d5278;
+  --text-light:    #6b84a8;
+  --border:        #dce8f5;
+  --shadow-sm:     0 2px 8px rgba(0,51,102,0.08);
+  --shadow-md:     0 6px 24px rgba(0,51,102,0.12);
+  --shadow-lg:     0 20px 56px rgba(0,51,102,0.2);
+  --radius-sm:     8px;
+  --radius-md:     14px;
+  --radius-lg:     20px;
+  --transition:    all 0.26s cubic-bezier(0.4,0,0.2,1);
+}
+
 .contact-container {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: #cadef3;               /* ✅ FIXED */
-  font-family: 'Inter', sans-serif;
-  padding: 30px 20px;
+  background: linear-gradient(160deg, #001d40 0%, var(--primary) 50%, #004a80 100%);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  padding: 40px 20px;
 }
 
-/* =======================
-   CARD
-======================= */
 .contact-card {
-  background: #f5f7fa;               /* ✅ FIXED */
-  border-radius: 16px;
-  padding: 32px 34px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 40px 36px;
   max-width: 600px;
   width: 100%;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-  color: #1f2937;
+  box-shadow: var(--shadow-lg);
+  color: var(--text-dark);
   text-align: center;
-  animation: fadeIn 0.8s ease-in-out;
+  animation: fadeInUp 0.5s ease both;
 }
 
-/* =======================
-   HEADING & TEXT
-======================= */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .contact-card h1 {
-  font-size: 1.9rem;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary);
   margin-bottom: 8px;
-  color: #003366;
-  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .contact-subtext {
-  font-size: 0.95rem;
-  color: #475569;
-  margin-bottom: 26px;
-  line-height: 1.5;
+  font-size: 0.92rem;
+  color: var(--text-light);
+  margin-bottom: 28px;
+  line-height: 1.6;
 }
 
-/* =======================
-   FORM
-======================= */
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin-bottom: 22px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .contact-form input,
 .contact-form textarea {
   padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid #cbd5e1;
-  font-size: 0.95rem;
-  background-color: #ffffff;
-  color: #1f2937;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.9rem;
+  background: var(--off-white);
+  color: var(--text-dark);
   resize: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: var(--transition);
+  outline: none;
 }
 
 .contact-form input::placeholder,
-.contact-form textarea::placeholder {
-  color: #94a3b8;
-}
+.contact-form textarea::placeholder { color: var(--text-light); }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
-  border-color: #003366;
-  box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.12);
+  border-color: var(--primary-light);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(0,87,146,0.1);
 }
 
-/* =======================
-   BUTTON
-======================= */
 .contact-form button {
-  padding: 12px;
-  background: linear-gradient(135deg, #003366, #005792);
-  color: #ffffff;
+  padding: 13px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
+  border-radius: var(--radius-sm);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
   cursor: pointer;
-  margin-top: 6px;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: var(--transition);
 }
 
 .contact-form button:hover {
-  background: linear-gradient(135deg, #005792, #c62828);
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, var(--primary-light), var(--accent));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,87,146,0.3);
 }
 
-/* =======================
-   CONTACT DETAILS
-======================= */
 .contact-details {
-  font-size: 0.9rem;
-  color: #475569;
-  margin-bottom: 16px;
-  line-height: 1.6;
+  font-size: 0.88rem;
+  color: var(--text-light);
+  margin-bottom: 18px;
+  line-height: 1.7;
 }
 
-/* =======================
-   SOCIAL ICONS
-======================= */
 .social-icons {
   display: flex;
   justify-content: center;
-  gap: 18px;
-  font-size: 1.4rem;
+  gap: 14px;
+  font-size: 1.3rem;
+  flex-wrap: wrap;
 }
 
 .social-icons a {
-  color: #003366;
-  transition: transform 0.2s ease, color 0.2s ease;
+  color: var(--primary);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--off-white);
+  border: 1.5px solid var(--border);
 }
 
 .social-icons a:hover {
-  transform: scale(1.15);
-  color: #c62828;
+  transform: scale(1.12) translateY(-2px);
+  color: var(--accent);
+  border-color: var(--accent);
+  background: #fff0f0;
 }
 
-/* =======================
-   STATUS MESSAGE
-======================= */
 .status-message {
-  color: #15803d;
-  font-weight: 600;
-  margin-top: 10px;
+  color: var(--success);
+  font-weight: 700;
+  margin-top: 12px;
   display: block;
   font-size: 0.9rem;
 }
 
-/* =======================
-   ANIMATION
-======================= */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@media (max-width: 640px) {
+  .contact-card { padding: 28px 20px; }
+  .contact-card h1 { font-size: 1.5rem; }
 }
