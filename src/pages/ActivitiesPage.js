@@ -41,7 +41,6 @@ const ActivitiesPage = () => {
             <div key={activity._id || index} className="activity-card">
               <h3>{activity.title}</h3>
               <p>{activity.description}</p>
-              <p>📍 {activity.location || "SSN Campus"}</p>
               <p>Status: {activity.status || "Past"}</p>
 
               {/* PHOTOS */}
