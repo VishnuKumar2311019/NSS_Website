@@ -45,7 +45,7 @@ const MainLayout = ({ children }) => {
 
       {/* ===== ANNOUNCEMENT ===== */}
       <div className="announcement-bar">
-        🌟 Maintenance Visit – Sept 23 • 📢 Team Meet – Sept 23 • 🎉 Orientation – Sept 24
+        🌟 Goonj Exhibition – March 6 • 🏕 NSS Annual Camp ’26 – March 8 • 🎉 NSS Farewell ’26 – Upcoming
       </div>
 
       {/* ===== NAVBAR ===== */}
