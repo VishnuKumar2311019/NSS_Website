@@ -729,3 +729,39 @@ blockquote span {
     width: 90vw;
   }
 }
+/* ============================================================
+   BOTTOM SOCIAL MEDIA BAR
+============================================================ */
+
+.floating-social{
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  z-index: 2000;
+}
+
+.floating-social a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  transition: all 0.25s ease;
+}
+
+.floating-social a:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+}
+
+.floating-social img{
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
