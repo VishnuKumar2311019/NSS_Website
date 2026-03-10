@@ -98,23 +98,23 @@ const Home = () => {
       {/* FOOTER */}
       <div className="footer-social">
         <h3>Follow Us</h3>
-        <div className="social-icons">
-          <a href="https://instagram.com/nssofssn" target="_blank" rel="noreferrer">
-            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" />
-          </a>
-          <a href="https://www.youtube.com/@nssofssn" target="_blank" rel="noreferrer">
-            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
-          </a>
-          <a href="https://x.com/SSNNSS579516641" target="_blank" rel="noreferrer">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" />
-          </a>
-          <a href="https://www.facebook.com/nssofssn?mibextid=ZbWKwL" target="_blank" rel="noreferrer">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" />
-          </a>
-          <a href="https://www.linkedin.com/company/nssssn/posts/?feedView=all" target="_blank" rel="noreferrer">
-            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" />
-          </a>
-        </div>
+<div className="social-icons">
+  <a href="https://instagram.com/nssofssn" target="_blank" rel="noreferrer">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/132px-Instagram_logo_2016.svg.png" alt="Instagram" />
+  </a>
+  <a href="https://www.youtube.com/@nssofssn" target="_blank" rel="noreferrer">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/159px-YouTube_full-color_icon_%282017%29.svg.png" alt="YouTube" />
+  </a>
+  <a href="https://x.com/SSNNSS579516641" target="_blank" rel="noreferrer">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/X_logo_2023_original.svg/300px-X_logo_2023_original.svg.png" alt="Twitter/X" />
+  </a>
+  <a href="https://www.facebook.com/nssofssn" target="_blank" rel="noreferrer">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/150px-2023_Facebook_icon.svg.png" alt="Facebook" />
+  </a>
+  <a href="https://www.linkedin.com/company/nssssn/" target="_blank" rel="noreferrer">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/150px-LinkedIn_logo_initials.png" alt="LinkedIn" />
+  </a>
+</div>
       </div>
 
     </MainLayout>
