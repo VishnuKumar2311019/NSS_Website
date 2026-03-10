@@ -737,11 +737,11 @@ blockquote span {
 
 .floating-social{
   position: fixed;
-  bottom: 8px;
+  bottom: 20px;   /* move slightly above */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
   z-index: 2000;
 }
@@ -753,8 +753,8 @@ blockquote span {
 }
 
 .floating-social img{
-  width: 22px;
-  height: 22px;
+  width: 24px;   /* slightly bigger */
+  height: 24px;
   opacity: 0.9;
   transition: 0.2s;
 }
