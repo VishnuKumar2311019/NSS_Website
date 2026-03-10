@@ -26,10 +26,15 @@ const Home = () => {
   return (
     <MainLayout>
 
-      {/* HERO SECTION */}
-      <div className="hero-section">
-        <h1 className="hero-text">Welcome to NSS UNIT OF SSN</h1>
-      </div>
+<div className="hero-section">
+  <img
+    src="/assets/camp-gallery/NssGroupPhoto.png"
+    alt="NSS Group"
+    className="hero-image"
+  />
+
+  <h1 className="hero-text">Welcome to NSS UNIT OF SSN</h1>
+</div>
 
       {/* ACTIVITIES */}
       <div className="trending-activities-wrapper">
