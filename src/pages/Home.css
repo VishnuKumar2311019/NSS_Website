@@ -699,10 +699,12 @@ blockquote span {
     display: none;
   }
 
- /* Hero */
-.hero-section {
-  min-height: 44vh;
-  background-position: 60% center;
+/* Hero - mobile fix */
+.hero-section{
+  min-height: 50vh;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
   /* Sections */
