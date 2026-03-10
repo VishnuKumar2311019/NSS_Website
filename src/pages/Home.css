@@ -733,13 +733,16 @@ blockquote span {
    BOTTOM SOCIAL MEDIA BAR
 ============================================================ */
 
+/* Bottom small social icons */
+
 .floating-social{
   position: fixed;
-  bottom: 20px;
+  bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 16px;
+  gap: 12px;
+  align-items: center;
   z-index: 2000;
 }
 
@@ -747,21 +750,16 @@ blockquote span {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-  transition: all 0.25s ease;
-}
-
-.floating-social a:hover{
-  transform: translateY(-6px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
 }
 
 .floating-social img{
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
+  width: 18px;
+  height: 18px;
+  opacity: 0.85;
+  transition: 0.2s;
+}
+
+.floating-social img:hover{
+  opacity: 1;
+  transform: scale(1.15);
 }
