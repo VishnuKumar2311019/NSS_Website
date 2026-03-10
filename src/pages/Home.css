@@ -699,10 +699,11 @@ blockquote span {
     display: none;
   }
 
-  /* Hero */
-  .hero-section {
-    min-height: 44vh;
-  }
+ /* Hero */
+.hero-section {
+  min-height: 44vh;
+  background-position: 60% center;
+}
 
   /* Sections */
   .trending-activities-wrapper {
