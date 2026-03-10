@@ -18,12 +18,22 @@ const MainLayout = ({ children }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
+useEffect(() => {
+  const timer = setInterval(() => {
+    setCurrentTime(new Date());
+  }, 1000);
+
+  const handleClick = () => {
+    setIsOpen(false);
+  };
+
+  document.addEventListener("click", handleClick);
+
+  return () => {
+    clearInterval(timer);
+    document.removeEventListener("click", handleClick);
+  };
+}, []);
 
   return (
     <>
@@ -49,13 +59,13 @@ const MainLayout = ({ children }) => {
       </div>
 
       {/* ===== NAVBAR ===== */}
-      <nav className="top-nav">
+      <nav className="top-nav" onClick={(e) => e.stopPropagation()}>
         <button className="hamburger" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X /> : <Menu />}
         </button>
 
         <ul className={`nav-list ${isOpen ? "open" : ""}`}>
-          <li><Link to="/">Home</Link></li>
+         <li><Link to="/" onClick={() => setIsOpen(false)}>Home</Link></li>
 
           <li>
             <Link to="/achievements">
