@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './AnnualCampPage.css';
 import MainLayout from './MainLayout';
-
+import camp2026_day1 from '../assets/camp-photos/Day-1.jpg';
+import camp2026_day2 from '../assets/camp-photos/Day-2.jpg';
+import camp2026_day3 from '../assets/camp-photos/Day-3.jpg';
+import camp2026_day4 from '../assets/camp-photos/Day-4.jpg';
+import camp2026_day5 from '../assets/camp-photos/Day-5.jpg';
+import camp2026_day6 from '../assets/camp-photos/Day-6.jpg';
+// ... repeat for day2 to day6
 /* ============================================================
    CAMP DATA PER YEAR
    To add photos:
@@ -84,42 +90,42 @@ const campData = {
         title: 'Day 1 – Team Formation & Village Survey',
         description:
           'Volunteers conducted village surveys covering 85 households and began school renovation activities while building strong community connections.',
-        photos: [],
+        photos: [camp2026_day1],
       },
       {
         id: 'day2',
         title: 'Day 2 – Saplings & Community Drive',
         description:
           'Saplings were planted in schools and garbage clearance drives were conducted, strengthening environmental awareness.',
-        photos: [],
+        photos: [camp2026_day2],
       },
       {
         id: 'day3',
         title: 'Day 3– School Renovation & Youth Discussion',
         description:
           'Classroom renovations were completed and interactive sessions were conducted on social awareness.',
-        photos: [],
+        photos: [camp2026_day3],
       },
       {
         id: 'day4',
         title: 'Day 4 – Lake Cleanup & Fun Activities',
         description:
           'A lake cleanup drive was conducted with EFI, followed by fun activities to boost volunteer morale.',
-        photos: [],
+        photos: [camp2026_day4],
       },
       {
         id: 'day5',
         title: 'Day 5 – Science Expo & Cultural Heritage',
         description:
           'A science exhibition and cultural visit strengthened both academic and cultural learning.',
-        photos: [],
+        photos: [camp2026_day5],
       },
       {
         id: 'day6',
         title: 'Day 6 – Valedictory & Reflections',
         description:
           'The valedictory ceremony celebrated volunteer contributions and concluded the camp on a positive note.',
-        photos: [],
+        photos: [camp2026_day6],
       },
     ],
     conclusion:
