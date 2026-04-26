@@ -26,7 +26,7 @@ function App() {
         <Route path="/mission" element={<MissionPage />} />
         <Route path="/initiatives" element={<InitiativesPage />} />
         <Route path="/achievements" element={<AchievementsPage />} />
-        <Route path="/annualcamp" element={<AnnualCampPage />} />
+        <Route path="/annualcamp/:year" element={<AnnualCampPage />} />
         <Route path="/volunteer_stories" element={<VolunteerStoriesPage />} />
         <Route path="/annualreport" element={<AnnualReportPage />} />
         <Route path="/collaborators" element={<CollaboratorsPage />} />
