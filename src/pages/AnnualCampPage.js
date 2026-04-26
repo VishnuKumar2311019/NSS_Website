@@ -187,15 +187,15 @@ const AnnualCampPage = () => {
               <p>{day.description}</p>
               {day.photos.length > 0 && (
                 <div className="gallery-grid" style={{ marginTop: '1.2rem' }}>
-                  {day.photos.map((src, idx) => (
-                  <img alt="NSS camp volunteers" /> 
-                      key={idx}
-                      src={src}
-                      alt={`Day ${i + 1} photo ${idx + 1}`}
-                      onClick={() => setLightbox(src)}
-                      style={{ cursor: 'pointer' }}
-                    />
-                  ))}
+{day.photos.map((src, idx) => (
+  <img
+    key={idx}
+    src={src}
+    alt={`Day ${i + 1} photo ${idx + 1}`}
+    onClick={() => setLightbox(src)}
+    style={{ cursor: 'pointer' }}
+  />
+))}
                 </div>
               )}
             </section>
@@ -232,7 +232,7 @@ const AnnualCampPage = () => {
             {visiblePhotos.length > 0 ? (
               <div className="gallery-grid camp-gallery-grid">
                 {visiblePhotos.map((item, idx) => (
-                  <img alt="Annual camp activities" />
+                  <img
                     key={idx}
                     src={item.src}
                     alt={`Camp photo ${idx + 1}`}
