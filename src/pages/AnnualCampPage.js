@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './AnnualCampPage.css';
 import MainLayout from './MainLayout';
-import camp2026_day1 from '../assets/camp-photos/Day-1.jpg';
-import camp2026_day2 from '../assets/camp-photos/Day-2.jpg';
-import camp2026_day3 from '../assets/camp-photos/Day-3.jpg';
-import camp2026_day4 from '../assets/camp-photos/Day-4.jpg';
-import camp2026_day5 from '../assets/camp-photos/Day-5.jpg';
-import camp2026_day6 from '../assets/camp-photos/Day-6.jpg';
+import camp2026_day1 from '../assets/camp-gallery/Day-1.jpg';
+import camp2026_day2 from '../assets/camp-gallery/Day-2.jpg';
+import camp2026_day3 from '../assets/camp-gallery/Day-3.jpg';
+import camp2026_day4 from '../assets/camp-gallery/Day-4.jpg';
+import camp2026_day5 from '../assets/camp-gallery/Day-5.jpg';
+import camp2026_day6 from '../assets/camp-gallery/Day-6.jpg';
 // ... repeat for day2 to day6
 /* ============================================================
    CAMP DATA PER YEAR
