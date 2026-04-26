@@ -188,7 +188,7 @@ const AnnualCampPage = () => {
               {day.photos.length > 0 && (
                 <div className="gallery-grid" style={{ marginTop: '1.2rem' }}>
                   {day.photos.map((src, idx) => (
-                    <img
+                  <img alt="NSS camp volunteers" /> 
                       key={idx}
                       src={src}
                       alt={`Day ${i + 1} photo ${idx + 1}`}
@@ -232,7 +232,7 @@ const AnnualCampPage = () => {
             {visiblePhotos.length > 0 ? (
               <div className="gallery-grid camp-gallery-grid">
                 {visiblePhotos.map((item, idx) => (
-                  <img
+                  <img alt="Annual camp activities" />
                     key={idx}
                     src={item.src}
                     alt={`Camp photo ${idx + 1}`}
