@@ -191,7 +191,7 @@ const AnnualCampPage = () => {
   <img
     key={idx}
     src={src}
-    alt={`Day ${i + 1} photo ${idx + 1}`}
+    alt={`Day ${i + 1} activity ${idx + 1}`}
     onClick={() => setLightbox(src)}
     style={{ cursor: 'pointer' }}
   />
@@ -235,7 +235,7 @@ const AnnualCampPage = () => {
                   <img
                     key={idx}
                     src={item.src}
-                    alt={`Camp photo ${idx + 1}`}
+                    alt={`Camp activity ${idx + 1}`}
                     onClick={() => setLightbox(item.src)}
                     style={{ cursor: 'pointer' }}
                   />
@@ -261,7 +261,7 @@ const AnnualCampPage = () => {
         <div className="camp-lightbox-overlay" onClick={() => setLightbox(null)}>
           <div className="camp-lightbox-content" onClick={(e) => e.stopPropagation()}>
             <button className="camp-lightbox-close" onClick={() => setLightbox(null)}>✖</button>
-            <img src={lightbox} alt="Preview" className="camp-lightbox-img" />
+            <img src={lightbox} alt="Lightbox view" className="camp-lightbox-img" />
           </div>
         </div>
       )}
