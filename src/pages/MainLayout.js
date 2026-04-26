@@ -18,22 +18,12 @@ const MainLayout = ({ children }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
 
-useEffect(() => {
-  const timer = setInterval(() => {
-    setCurrentTime(new Date());
-  }, 1000);
-
-  const handleClick = () => {
-    setIsOpen(false);
-  };
-
-  document.addEventListener("click", handleClick);
-
-  return () => {
-    clearInterval(timer);
-    document.removeEventListener("click", handleClick);
-  };
-}, []);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <>
@@ -55,17 +45,17 @@ useEffect(() => {
 
       {/* ===== ANNOUNCEMENT ===== */}
       <div className="announcement-bar">
-        🌟 Goonj Exhibition – March 6 • 🏕 NSS Annual Camp ’26 – March 8 • 🎉 NSS Farewell ’26 – Upcoming
+        🌟 Maintenance Visit – Sept 23 • 📢 Team Meet – Sept 23 • 🎉 Orientation – Sept 24
       </div>
 
       {/* ===== NAVBAR ===== */}
-      <nav className="top-nav" onClick={(e) => e.stopPropagation()}>
+      <nav className="top-nav">
         <button className="hamburger" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X /> : <Menu />}
         </button>
 
         <ul className={`nav-list ${isOpen ? "open" : ""}`}>
-         <li><Link to="/" onClick={() => setIsOpen(false)}>Home</Link></li>
+          <li><Link to="/">Home</Link></li>
 
           <li>
             <Link to="/achievements">
@@ -73,10 +63,15 @@ useEffect(() => {
             </Link>
           </li>
 
-          <li>
-            <Link to="/annualcamp">
-              <TentTree size={18} /> Annual Camp
-            </Link>
+          {/* ===== ANNUAL CAMP DROPDOWN ===== */}
+          <li className="dropdown">
+            <span className="dropdown-trigger">
+              <TentTree size={18} /> Annual Camp ▾
+            </span>
+            <ul className="dropdown-menu">
+              <li><Link to="/annualcamp/2024-2025">📅 2024–2025</Link></li>
+              <li><Link to="/annualcamp/2025-2026">📅 2025–2026</Link></li>
+            </ul>
           </li>
 
           {/* ===== TEAMS DROPDOWN ===== */}
