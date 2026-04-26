@@ -95,35 +95,28 @@ const campData = {
       },
       {
         id: 'day3',
-        title: 'Day 3 – Empowering Students & Civic Engagement',
-        description:
-          'Infrastructure improvements continued, and a voter ID registration drive helped register around 100 individuals.',
-        photos: [],
-      },
-      {
-        id: 'day4',
-        title: 'Day 4 – School Renovation & Youth Discussion',
+        title: 'Day 3– School Renovation & Youth Discussion',
         description:
           'Classroom renovations were completed and interactive sessions were conducted on social awareness.',
         photos: [],
       },
       {
-        id: 'day5',
-        title: 'Day 5 – Lake Cleanup & Fun Activities',
+        id: 'day4',
+        title: 'Day 4 – Lake Cleanup & Fun Activities',
         description:
           'A lake cleanup drive was conducted with EFI, followed by fun activities to boost volunteer morale.',
         photos: [],
       },
       {
-        id: 'day6',
-        title: 'Day 6 – Science Expo & Cultural Heritage',
+        id: 'day5',
+        title: 'Day 5 – Science Expo & Cultural Heritage',
         description:
           'A science exhibition and cultural visit strengthened both academic and cultural learning.',
         photos: [],
       },
       {
-        id: 'day7',
-        title: 'Day 7 – Valedictory & Reflections',
+        id: 'day6',
+        title: 'Day 6 – Valedictory & Reflections',
         description:
           'The valedictory ceremony celebrated volunteer contributions and concluded the camp on a positive note.',
         photos: [],
