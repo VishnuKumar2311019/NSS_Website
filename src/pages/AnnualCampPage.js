@@ -73,22 +73,64 @@ const campData = {
       'The NSS Annual Camp 2024–2025 fostered leadership, service, and community bonding, leaving a lasting impact on both volunteers and villagers.',
   },
 
-  '2025-2026': {
+ '2025-2026': {
     label: '2025–2026',
-    dateRange: 'TBA',
-    village: 'TBA',
-    volunteers: 0,
+    dateRange: '06.03.26 - 11.03.26',
+    village: 'Panditha Medu Village',
+    volunteers: 30,
     days: [
-      { id: 'day1', title: 'Day 1', description: 'Details will be updated after the camp.', photos: [] },
-      { id: 'day2', title: 'Day 2', description: 'Details will be updated after the camp.', photos: [] },
-      { id: 'day3', title: 'Day 3', description: 'Details will be updated after the camp.', photos: [] },
-      { id: 'day4', title: 'Day 4', description: 'Details will be updated after the camp.', photos: [] },
-      { id: 'day5', title: 'Day 5', description: 'Details will be updated after the camp.', photos: [] },
-      { id: 'day6', title: 'Day 6', description: 'Details will be updated after the camp.', photos: [] },
-      { id: 'day7', title: 'Day 7', description: 'Details will be updated after the camp.', photos: [] },
+      {
+        id: 'day1',
+        title: 'Day 1 – Team Formation & Village Survey',
+        description:
+          'Volunteers conducted village surveys covering 85 households and began school renovation activities while building strong community connections.',
+        photos: [],
+      },
+      {
+        id: 'day2',
+        title: 'Day 2 – Saplings & Community Drive',
+        description:
+          'Saplings were planted in schools and garbage clearance drives were conducted, strengthening environmental awareness.',
+        photos: [],
+      },
+      {
+        id: 'day3',
+        title: 'Day 3 – Empowering Students & Civic Engagement',
+        description:
+          'Infrastructure improvements continued, and a voter ID registration drive helped register around 100 individuals.',
+        photos: [],
+      },
+      {
+        id: 'day4',
+        title: 'Day 4 – School Renovation & Youth Discussion',
+        description:
+          'Classroom renovations were completed and interactive sessions were conducted on social awareness.',
+        photos: [],
+      },
+      {
+        id: 'day5',
+        title: 'Day 5 – Lake Cleanup & Fun Activities',
+        description:
+          'A lake cleanup drive was conducted with EFI, followed by fun activities to boost volunteer morale.',
+        photos: [],
+      },
+      {
+        id: 'day6',
+        title: 'Day 6 – Science Expo & Cultural Heritage',
+        description:
+          'A science exhibition and cultural visit strengthened both academic and cultural learning.',
+        photos: [],
+      },
+      {
+        id: 'day7',
+        title: 'Day 7 – Valedictory & Reflections',
+        description:
+          'The valedictory ceremony celebrated volunteer contributions and concluded the camp on a positive note.',
+        photos: [],
+      },
     ],
     conclusion:
-      'Camp details and photos will be added once the 2025–2026 Annual Camp is concluded.',
+      'The NSS Annual Camp 2024–2025 fostered leadership, service, and community bonding, leaving a lasting impact on both volunteers and villagers.',
   },
 };
 
